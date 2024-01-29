@@ -1,0 +1,8 @@
+{
+	"SourceFiles": [
+		"C:\\Users\\yuisa\\OneDrive\\Documents\\Unreal Projects\\FastPacedFPSGame\\Source\\FastPacedFPSGame\\FastPacedFPSGame.Build.cs",
+		"C:\\Users\\yuisa\\OneDrive\\Documents\\Unreal Projects\\FastPacedFPSGame\\Source\\FastPacedFPSGame.Target.cs",
+		"C:\\Users\\yuisa\\OneDrive\\Documents\\Unreal Projects\\FastPacedFPSGame\\Source\\FastPacedFPSGameEditor.Target.cs"
+	],
+	"EngineVersion": "5.3.2"
+}

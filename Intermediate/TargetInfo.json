@@ -1,0 +1,14 @@
+{
+	"Targets": [
+		{
+			"Name": "FastPacedFPSGame",
+			"Path": "..\\Source\\FastPacedFPSGame.Target.cs",
+			"Type": "Game"
+		},
+		{
+			"Name": "FastPacedFPSGameEditor",
+			"Path": "..\\Source\\FastPacedFPSGameEditor.Target.cs",
+			"Type": "Editor"
+		}
+	]
+}
