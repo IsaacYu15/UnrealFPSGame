@@ -92,12 +92,14 @@ void AFastPacedFPSGameCharacter::SetupPlayerInputComponent(UInputComponent* Play
 //THIS COULD BE OPTIMIZED WITH BEGIN OVERLAP :(
 void AFastPacedFPSGameCharacter::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Yellow, TEXT("Wall Run Start"));
+	GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Yellow, TEXT("Wall Run Start!"));
 	if (OtherActor->ActorHasTag("WallRunnable")) {
 		isWallRunning = true;
 		GetCharacterMovement()->GravityScale = 0;
-		FVector wallRunVelocity(GetCharacterMovement()->Velocity.X, GetCharacterMovement()->Velocity.Y, 0);
-		GetCharacterMovement()->Velocity = wallRunVelocity;
+
+		FVector runDir = FVector::CrossProduct(GetActorUpVector(), SweepResult.ImpactNormal);
+
+		FVector wallRunVelocity(runDir.X, runDir.Y, 0);
 
 		wallJumpOffDir = SweepResult.ImpactNormal;
 
@@ -121,7 +123,7 @@ void AFastPacedFPSGameCharacter::Move(const FInputActionValue& Value)
 	// input is a Vector2D
 	FVector2D MovementVector = Value.Get<FVector2D>();
 
-	if (Controller != nullptr)
+	if (Controller != nullptr && !isWallRunning)
 	{
 		// add movement 
 		AddMovementInput(GetActorForwardVector(), MovementVector.Y);
@@ -158,6 +160,7 @@ void AFastPacedFPSGameCharacter::Jump()
 
 	if (isWallRunning) {
 		GetCharacterMovement()->Velocity = (GetCharacterMovement()->Velocity.GetSafeNormal(0.0f) + wallJumpOffDir) * wallJumpOffVelocity;
+		GetCharacterMovement()->Velocity += FVector(0,0,1) * wallJumpOffVelocity / 2.0f;
 	}
 }
 
