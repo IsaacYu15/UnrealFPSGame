@@ -11,6 +11,7 @@
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 class AActor;
 class UPrimitiveComponent;
+class USkeletalMeshComponent;
 struct FHitResult;
 #ifdef FASTPACEDFPSGAME_FastPacedFPSGameCharacter_generated_h
 #error "FastPacedFPSGameCharacter.generated.h already included, missing '#pragma once' in FastPacedFPSGameCharacter.h"
@@ -22,10 +23,10 @@ struct FHitResult;
 #define FID_Users_yuisa_OneDrive_Documents_Unreal_Projects_FastPacedFPSGame_Source_FastPacedFPSGame_FastPacedFPSGameCharacter_h_22_EDITOR_ONLY_SPARSE_DATA_PROPERTY_ACCESSORS
 #define FID_Users_yuisa_OneDrive_Documents_Unreal_Projects_FastPacedFPSGame_Source_FastPacedFPSGame_FastPacedFPSGameCharacter_h_22_RPC_WRAPPERS_NO_PURE_DECLS \
  \
+	DECLARE_FUNCTION(execTimer); \
 	DECLARE_FUNCTION(execOnOverlapEnd); \
 	DECLARE_FUNCTION(execOnOverlapBegin); \
-	DECLARE_FUNCTION(execGetHasRifle); \
-	DECLARE_FUNCTION(execSetHasRifle);
+	DECLARE_FUNCTION(execGetMesh1P);
 
 
 #define FID_Users_yuisa_OneDrive_Documents_Unreal_Projects_FastPacedFPSGame_Source_FastPacedFPSGame_FastPacedFPSGameCharacter_h_22_ACCESSORS

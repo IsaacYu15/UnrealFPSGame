@@ -65,6 +65,7 @@ void UTP_WeaponComponent::Fire()
 
 void UTP_WeaponComponent::AttachWeapon(AFastPacedFPSGameCharacter* TargetCharacter)
 {
+	/*
 	Character = TargetCharacter;
 
 	// Check that the character is valid, and has no rifle yet
@@ -94,7 +95,8 @@ void UTP_WeaponComponent::AttachWeapon(AFastPacedFPSGameCharacter* TargetCharact
 			// Fire
 			EnhancedInputComponent->BindAction(FireAction, ETriggerEvent::Triggered, this, &UTP_WeaponComponent::Fire);
 		}
-	}
+	}*/
+	
 }
 
 void UTP_WeaponComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)

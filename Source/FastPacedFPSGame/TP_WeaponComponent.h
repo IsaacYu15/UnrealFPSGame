@@ -58,3 +58,5 @@ private:
 	/** The Character holding this weapon*/
 	AFastPacedFPSGameCharacter* Character;
 };
+
+

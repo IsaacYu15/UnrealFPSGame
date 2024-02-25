@@ -63,6 +63,37 @@ void AFastPacedFPSGameCharacter::BeginPlay()
 		}
 	}
 
+	PrimaryActorTick.bCanEverTick = true;
+	
+
+}
+
+void AFastPacedFPSGameCharacter::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+
+	if (isWallRunning) {
+		GetCharacterMovement()->Velocity = wallRunVelocity * wallRunSpeed;
+	}
+
+	if (isGrappling) {
+		GetCharacterMovement()->Velocity = grappleVelocity * grappleSpeed;
+
+		if ((GetActorLocation() - grappleLocation).Size() < 500) { //in all fairness, capsule is 55
+			isGrappling = false;
+			GetCharacterMovement()->GravityScale = 1;
+		}
+	}
+
+	if (isDashing) {
+		GetCharacterMovement()->Velocity = dashVelocity * dashSpeed;
+
+		if ((GetActorLocation() - dashLocation).Size() > dashDistance) { 
+			isDashing = false;
+			GetCharacterMovement()->Velocity = FVector::ZeroVector;
+		}
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////// Input
@@ -82,6 +113,15 @@ void AFastPacedFPSGameCharacter::SetupPlayerInputComponent(UInputComponent* Play
 
 		// Looking
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AFastPacedFPSGameCharacter::Look);
+
+		// Grapple
+		EnhancedInputComponent->BindAction(GrappleAction, ETriggerEvent::Started, this, &AFastPacedFPSGameCharacter::Grapple);
+
+		// Attack
+		EnhancedInputComponent->BindAction(AttackAction, ETriggerEvent::Started, this, &AFastPacedFPSGameCharacter::Attack);
+
+		//Dash
+		EnhancedInputComponent->BindAction(DashAction, ETriggerEvent::Started, this, &AFastPacedFPSGameCharacter::Dash);
 	}
 	else
 	{
@@ -89,45 +129,71 @@ void AFastPacedFPSGameCharacter::SetupPlayerInputComponent(UInputComponent* Play
 	}
 }
 
-//THIS COULD BE OPTIMIZED WITH BEGIN OVERLAP :(
+
 void AFastPacedFPSGameCharacter::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Yellow, TEXT("Wall Run Start!"));
+	leanDireciton = 1;
+
 	if (OtherActor->ActorHasTag("WallRunnable")) {
+		GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Red, TEXT("Wall Run Start!"));
+
 		isWallRunning = true;
 		GetCharacterMovement()->GravityScale = 0;
 
 		FVector runDir = FVector::CrossProduct(GetActorUpVector(), SweepResult.ImpactNormal);
+		FVector dirOne = FVector(runDir.X, runDir.Y, 0);
+		FVector dirTwo = -dirOne;
 
-		FVector wallRunVelocity(runDir.X, runDir.Y, 0);
+		float dot = FVector::DotProduct(dirOne, GetActorForwardVector());
+		float dotTwo = FVector::DotProduct(dirTwo, GetActorForwardVector());
+
+		if (FMath::Acos(dot) < FMath::Acos(dotTwo)) {
+			wallRunVelocity = FVector(runDir.X, runDir.Y, 0);
+		}
+		else {
+			wallRunVelocity = FVector(-runDir.X, -runDir.Y, 0);
+		}
+		
 
 		wallJumpOffDir = SweepResult.ImpactNormal;
 
+		if (FMath::Acos(FVector::DotProduct(GetActorRightVector(), wallJumpOffDir)) > FMath::Acos(FVector::DotProduct(-GetActorRightVector(), wallJumpOffDir))) {
+			leanDireciton = 0;
+		}
+		else {
+			leanDireciton = 2;
+		}
+
 	}
+
+	isGrappling = false;
+	isDashing = false;
 
 }
 
 void AFastPacedFPSGameCharacter::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Yellow, TEXT("Wall Run End"));
+	leanDireciton = 1;
+	
 	if (OtherActor->ActorHasTag("WallRunnable")) {
 		isWallRunning = false;
 		GetCharacterMovement()->GravityScale = 1.0;
 	}
 }
 
-
-
 void AFastPacedFPSGameCharacter::Move(const FInputActionValue& Value)
 {
 	// input is a Vector2D
+
 	FVector2D MovementVector = Value.Get<FVector2D>();
+
 
 	if (Controller != nullptr && !isWallRunning)
 	{
 		// add movement 
 		AddMovementInput(GetActorForwardVector(), MovementVector.Y);
 		AddMovementInput(GetActorRightVector(), MovementVector.X);
+
 	}
 }
 
@@ -144,14 +210,87 @@ void AFastPacedFPSGameCharacter::Look(const FInputActionValue& Value)
 	}
 }
 
-void AFastPacedFPSGameCharacter::SetHasRifle(bool bNewHasRifle)
+void AFastPacedFPSGameCharacter::Grapple()
 {
-	bHasRifle = bNewHasRifle;
+
+	if (isGrappling == false) {
+		FHitResult Hit;
+		FVector TraceStart = GetActorLocation();
+		FVector TraceEnd = GetActorLocation() + GetFirstPersonCameraComponent()->GetForwardVector() * 90000;
+
+		FCollisionQueryParams QueryParams;
+		QueryParams.AddIgnoredActor(this);
+
+		//LOOK INTO THESE PARAMETERS BROOO
+		GetWorld()->LineTraceSingleByChannel(Hit, TraceStart, TraceEnd, ECC_Pawn, QueryParams);
+
+		if (Hit.bBlockingHit && IsValid(Hit.GetActor()) && Hit.GetActor()->ActorHasTag("GrapplePoint"))
+		{
+			DrawDebugLine(GetWorld(), TraceStart, Hit.ImpactPoint, FColor::Red, false, 5.0f, 0, 10.0f);
+
+			grappleVelocity = GetFirstPersonCameraComponent()->GetForwardVector().GetSafeNormal();
+			grappleLocation = Hit.ImpactPoint;
+
+			isGrappling = true;
+			GetCharacterMovement()->GravityScale = 0;
+
+			Super::LaunchCharacter(grappleVelocity, false, false);
+		}
+
+	}
+	
+
 }
 
-bool AFastPacedFPSGameCharacter::GetHasRifle()
+void AFastPacedFPSGameCharacter::Attack()
 {
-	return bHasRifle;
+	if (!isAttacking) {
+
+		FHitResult Hit;
+		FVector TraceStart = GetActorLocation();
+		FVector TraceEnd = GetActorLocation() + GetFirstPersonCameraComponent()->GetForwardVector() * 350;
+
+		FCollisionQueryParams QueryParams;
+		QueryParams.AddIgnoredActor(this);
+
+		//LOOK INTO THESE PARAMETERS BROOO
+		GetWorld()->LineTraceSingleByChannel(Hit, TraceStart, TraceEnd, ECC_Pawn, QueryParams);
+
+		DrawDebugLine(GetWorld(), TraceStart, TraceEnd, FColor::Blue, false, 1.0f, 0, 10.0f);
+
+		if (Hit.bBlockingHit && IsValid(Hit.GetActor()))
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Blue, TEXT("Hit"));
+		}
+
+		isAttacking = true;
+
+		GetWorldTimerManager().SetTimer(CountdownTimerHandle, this, &AFastPacedFPSGameCharacter::Timer, 0.1f, true);
+
+	}
+
+}
+
+void AFastPacedFPSGameCharacter::Dash()
+{
+
+	dashVelocity = GetFirstPersonCameraComponent()->GetForwardVector().GetSafeNormal();
+	dashLocation = GetActorLocation();
+
+	isDashing = true;
+}
+
+void AFastPacedFPSGameCharacter::Timer()
+{
+	--attackCooldownTime;
+
+	if (attackCooldownTime < 0)
+	{
+		attackCooldownTime = 3;
+		GetWorldTimerManager().ClearTimer(CountdownTimerHandle);
+
+		isAttacking = false;
+	}
 }
 
 void AFastPacedFPSGameCharacter::Jump()
@@ -160,7 +299,7 @@ void AFastPacedFPSGameCharacter::Jump()
 
 	if (isWallRunning) {
 		GetCharacterMovement()->Velocity = (GetCharacterMovement()->Velocity.GetSafeNormal(0.0f) + wallJumpOffDir) * wallJumpOffVelocity;
-		GetCharacterMovement()->Velocity += FVector(0,0,1) * wallJumpOffVelocity / 2.0f;
+		GetCharacterMovement()->Velocity += FVector(0,0,1) * wallJumpOffVelocity / 2.5f;
 	}
 }
 

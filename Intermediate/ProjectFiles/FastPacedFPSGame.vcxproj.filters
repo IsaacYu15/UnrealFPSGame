@@ -11,6 +11,9 @@
     <None Include="..\..\Source\FastPacedFPSGameEditor.Target.cs">
       <Filter>Source</Filter>
     </None>
+    <None Include="..\..\.gitattributes" />
+    <None Include="..\..\.gitignore" />
+    <None Include="..\..\.vsconfig" />
     <Filter Include="Config">
       <UniqueIdentifier>{FA535FFB-25E1-3D20-B416-52F9BE21E06E}</UniqueIdentifier>
     </Filter>
@@ -20,10 +23,16 @@
     <None Include="..\..\Config\DefaultEditorPerProjectUserSettings.ini">
       <Filter>Config</Filter>
     </None>
+    <None Include="..\..\Config\DefaultEditorSettings.ini">
+      <Filter>Config</Filter>
+    </None>
     <None Include="..\..\Config\DefaultEngine.ini">
       <Filter>Config</Filter>
     </None>
     <None Include="..\..\Config\DefaultGame.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultGameplayTags.ini">
       <Filter>Config</Filter>
     </None>
     <None Include="..\..\Config\DefaultInput.ini">
@@ -32,6 +41,12 @@
     <Filter Include="Source\FastPacedFPSGame">
       <UniqueIdentifier>{1EB7A507-8C7C-30FD-A406-CB41FB21148F}</UniqueIdentifier>
     </Filter>
+    <ClCompile Include="..\..\Source\FastPacedFPSGame\ActorHealthComponent.cpp">
+      <Filter>Source\FastPacedFPSGame</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\FastPacedFPSGame\ActorHealthComponent.h">
+      <Filter>Source\FastPacedFPSGame</Filter>
+    </ClInclude>
     <None Include="..\..\Source\FastPacedFPSGame\FastPacedFPSGame.Build.cs">
       <Filter>Source\FastPacedFPSGame</Filter>
     </None>
@@ -63,6 +78,12 @@
       <Filter>Source\FastPacedFPSGame</Filter>
     </ClCompile>
     <ClInclude Include="..\..\Source\FastPacedFPSGame\FastPacedFPSGameProjectile.h">
+      <Filter>Source\FastPacedFPSGame</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\FastPacedFPSGame\TestClass.cpp">
+      <Filter>Source\FastPacedFPSGame</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\FastPacedFPSGame\TestClass.h">
       <Filter>Source\FastPacedFPSGame</Filter>
     </ClInclude>
     <ClCompile Include="..\..\Source\FastPacedFPSGame\TP_PickUpComponent.cpp">
