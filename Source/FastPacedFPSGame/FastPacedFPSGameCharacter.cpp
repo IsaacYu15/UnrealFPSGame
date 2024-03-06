@@ -64,7 +64,6 @@ void AFastPacedFPSGameCharacter::BeginPlay()
 	}
 
 	PrimaryActorTick.bCanEverTick = true;
-	
 
 }
 
@@ -72,28 +71,29 @@ void AFastPacedFPSGameCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	if (isDashing) {
+		GetCharacterMovement()->Velocity = dashVelocity * dashSpeed;
 
-	if (isWallRunning) {
-		GetCharacterMovement()->Velocity = wallRunVelocity * wallRunSpeed;
-	}
+		if ((GetActorLocation() - dashLocation).Size() > dashDistance) {
+			isDashing = false;
+			GetCharacterMovement()->Velocity = FVector::ZeroVector;
+		}
 
-	if (isGrappling) {
+	} else if (isGrappling) {
 		GetCharacterMovement()->Velocity = grappleVelocity * grappleSpeed;
 
 		if ((GetActorLocation() - grappleLocation).Size() < 500) { //in all fairness, capsule is 55
 			isGrappling = false;
 			GetCharacterMovement()->GravityScale = 1;
 		}
+
+	} else if (isWallRunning) {
+		GetCharacterMovement()->Velocity = wallRunVelocity * wallRunSpeed;
 	}
 
-	if (isDashing) {
-		GetCharacterMovement()->Velocity = dashVelocity * dashSpeed;
 
-		if ((GetActorLocation() - dashLocation).Size() > dashDistance) { 
-			isDashing = false;
-			GetCharacterMovement()->Velocity = FVector::ZeroVector;
-		}
-	}
+
+
 }
 
 //////////////////////////////////////////////////////////////////////////// Input
@@ -128,7 +128,6 @@ void AFastPacedFPSGameCharacter::SetupPlayerInputComponent(UInputComponent* Play
 		UE_LOG(LogTemplateCharacter, Error, TEXT("'%s' Failed to find an Enhanced Input Component! This template is built to use the Enhanced Input system. If you intend to use the legacy system, then you will need to update this C++ file."), *GetNameSafe(this));
 	}
 }
-
 
 void AFastPacedFPSGameCharacter::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
@@ -214,6 +213,8 @@ void AFastPacedFPSGameCharacter::Grapple()
 {
 
 	if (isGrappling == false) {
+		GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Red, TEXT("Grapple"));
+
 		FHitResult Hit;
 		FVector TraceStart = GetActorLocation();
 		FVector TraceEnd = GetActorLocation() + GetFirstPersonCameraComponent()->GetForwardVector() * 90000;
@@ -221,12 +222,12 @@ void AFastPacedFPSGameCharacter::Grapple()
 		FCollisionQueryParams QueryParams;
 		QueryParams.AddIgnoredActor(this);
 
-		//LOOK INTO THESE PARAMETERS BROOO
 		GetWorld()->LineTraceSingleByChannel(Hit, TraceStart, TraceEnd, ECC_Pawn, QueryParams);
 
 		if (Hit.bBlockingHit && IsValid(Hit.GetActor()) && Hit.GetActor()->ActorHasTag("GrapplePoint"))
 		{
-			DrawDebugLine(GetWorld(), TraceStart, Hit.ImpactPoint, FColor::Red, false, 5.0f, 0, 10.0f);
+
+			DrawDebugLine(GetWorld(), TraceStart, Hit.ImpactPoint, FColor::Red, false, 1.0f, 0, 10.0f);
 
 			grappleVelocity = GetFirstPersonCameraComponent()->GetForwardVector().GetSafeNormal();
 			grappleLocation = Hit.ImpactPoint;
@@ -265,7 +266,7 @@ void AFastPacedFPSGameCharacter::Attack()
 
 		isAttacking = true;
 
-		GetWorldTimerManager().SetTimer(CountdownTimerHandle, this, &AFastPacedFPSGameCharacter::Timer, 0.1f, true);
+		GetWorldTimerManager().SetTimer(CountdownTimerHandle, this, &AFastPacedFPSGameCharacter::Timer, 0.0f, true);
 
 	}
 
@@ -273,8 +274,12 @@ void AFastPacedFPSGameCharacter::Attack()
 
 void AFastPacedFPSGameCharacter::Dash()
 {
+	dashVelocity = GetCharacterMovement()->GetLastInputVector().GetSafeNormal();
 
-	dashVelocity = GetFirstPersonCameraComponent()->GetForwardVector().GetSafeNormal();
+	if (dashVelocity == FVector::ZeroVector) {
+		dashVelocity = GetFirstPersonCameraComponent()->GetForwardVector().GetSafeNormal();
+	}
+
 	dashLocation = GetActorLocation();
 
 	isDashing = true;

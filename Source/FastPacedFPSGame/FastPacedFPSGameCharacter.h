@@ -164,6 +164,8 @@ public:
 	UFUNCTION()
 	void Timer();
 
+private: 
+
 	
 };
 
