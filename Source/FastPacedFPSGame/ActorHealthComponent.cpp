@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
+#include "GameFramework/CharacterMovementComponent.h"
+#include "FastPacedFPSGameCharacter.h"
 #include "ActorHealthComponent.h"
 
 // Sets default values for this component's properties
@@ -28,16 +29,37 @@ void UActorHealthComponent::BeginPlay()
 	}
 }
 
+//ADD KNOCKBACK AND DAMAGE INTO THE PARAMETERS
 void UActorHealthComponent::TakeDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser)
 {
+
 	if (Damage <= 0) {
 		return;
 	}
 
-	//actor components do not have access to gengine
 	Health = FMath::Clamp(Health - Damage, 0.0f, DefaultHealth);
 
+	//if we are the player character, apply an impulse force backwards
+	if (Cast<AFastPacedFPSGameCharacter>(GetOwner())) {
 
 
+		//Knockback
+		ACharacter* Character = Cast<ACharacter>(GetOwner());
+
+		if (Character)
+		{
+			FString TheFloatStr = FString::SanitizeFloat(Health);
+			GEngine->AddOnScreenDebugMessage(-1, 1.0, FColor::Red, *TheFloatStr);
+			FVector Direction = (GetOwner()->GetActorUpVector()).GetSafeNormal() * 100;
+			Character->LaunchCharacter(Direction, true, true);
+		}
+
+	}
 }
+
+
+
+
+
+
 

@@ -52,13 +52,12 @@ void UDamagePlayerOnContact::TickComponent(float DeltaTime, ELevelTick TickType,
 
 void UDamagePlayerOnContact::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Trigger Begin"));
 	TSubclassOf<UDamageType> DmgTypeClass = UDamageType::StaticClass(); //damage type maybe necessary later down the line
 	OtherActor->TakeDamage(Damage, FDamageEvent(DmgTypeClass), nullptr, this->GetOwner());
 }
 
 void UDamagePlayerOnContact::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Trigger End"));
+
 }
 
