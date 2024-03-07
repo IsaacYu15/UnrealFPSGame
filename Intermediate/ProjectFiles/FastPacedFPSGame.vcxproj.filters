@@ -47,6 +47,12 @@
     <ClInclude Include="..\..\Source\FastPacedFPSGame\ActorHealthComponent.h">
       <Filter>Source\FastPacedFPSGame</Filter>
     </ClInclude>
+    <ClCompile Include="..\..\Source\FastPacedFPSGame\DamagePlayerOnContact.cpp">
+      <Filter>Source\FastPacedFPSGame</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\FastPacedFPSGame\DamagePlayerOnContact.h">
+      <Filter>Source\FastPacedFPSGame</Filter>
+    </ClInclude>
     <None Include="..\..\Source\FastPacedFPSGame\FastPacedFPSGame.Build.cs">
       <Filter>Source\FastPacedFPSGame</Filter>
     </None>
