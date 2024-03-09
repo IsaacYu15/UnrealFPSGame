@@ -134,7 +134,7 @@ void AFastPacedFPSGameCharacter::SetupPlayerInputComponent(UInputComponent* Play
 void AFastPacedFPSGameCharacter::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	//CLEAN: SHOULD BE SMOOTHER WAY OF DOING THIS...
-	leanDireciton = 1;
+	leanDirection = 1;
 	ImpactNormal = SweepResult.ImpactNormal;
 
 	if (OtherActor->ActorHasTag("WallRunnable")) {
@@ -161,10 +161,10 @@ void AFastPacedFPSGameCharacter::OnOverlapBegin(UPrimitiveComponent* OverlappedC
 		wallJumpOffDir = SweepResult.ImpactNormal;
 
 		if (FMath::Acos(FVector::DotProduct(GetActorRightVector(), wallJumpOffDir)) > FMath::Acos(FVector::DotProduct(-GetActorRightVector(), wallJumpOffDir))) {
-			leanDireciton = 0;
+			leanDirection = 0;
 		}
 		else {
-			leanDireciton = 2;
+			leanDirection = 2;
 		}
 
 	}
@@ -176,7 +176,7 @@ void AFastPacedFPSGameCharacter::OnOverlapBegin(UPrimitiveComponent* OverlappedC
 
 void AFastPacedFPSGameCharacter::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
-	leanDireciton = 1;
+	leanDirection = 1;
 	
 	if (OtherActor->ActorHasTag("WallRunnable")) {
 		isWallRunning = false;

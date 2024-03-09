@@ -72,64 +72,71 @@ public:
 
 	void Jump() override;
 
+	/*WALL RUNNING */
 	UPROPERTY(EditAnywhere)
 	float wallRunSpeed;
 
-	UPROPERTY(BlueprintReadOnly, Category = Input)
-	int leanDireciton = 1;
+	UPROPERTY(BlueprintReadOnly, Category = "WallRunning")
+	int leanDirection = 1;
 
-	UPROPERTY(BlueprintReadOnly, Category = Input)
+	UPROPERTY(BlueprintReadOnly, Category = "WallRunning")
 	bool isWallRunning;
-
-	UPROPERTY(BlueprintReadOnly, Category = Input)
-	bool isGrappling;
-
-	UPROPERTY(BlueprintReadOnly, Category = Input)
-	bool isDashing;
 
 	UPROPERTY()
 	FVector wallJumpOffDir;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "WallRunning")
 	float wallJumpOffVelocity;
 	
 	UPROPERTY()
 	FVector wallRunVelocity;
 
+	/*GRAPPLING*/
 	UPROPERTY()
 	FVector grappleVelocity;
 
 	UPROPERTY()
 	FVector grappleLocation;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Grappling")
 	float grappleSpeed;
 
-	UPROPERTY(BlueprintReadOnly, Category = Input)
+	UPROPERTY(BlueprintReadOnly, Category = "Grappling")
+	bool isGrappling;
+
+	/*ATTACKING*/
+
+	UPROPERTY(BlueprintReadOnly, Category = "Attacking")
 	bool isAttacking;
 
-	UPROPERTY(EditAnywhere)
+	/*TIMING*/
+
+	UPROPERTY(EditAnywhere, Category = "CoolDowns")
 	int32 attackCooldownTime = 3;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "CoolDowns")
 	int32 DashCooldownTime = 1;
 
 	FTimerHandle CountdownTimerHandle;
-
+	
+	/*DASHING*/
 	UPROPERTY()
 	FVector dashLocation;
 
 	UPROPERTY()
 	FVector dashVelocity;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Dashing")
 	float dashSpeed;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Dashing")
 	float dashDistance;
 
 	UPROPERTY()
 	bool CanDash = true;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Dashing")
+	bool isDashing;
 
 
 
