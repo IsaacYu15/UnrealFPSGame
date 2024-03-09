@@ -71,12 +71,14 @@ void AFastPacedFPSGameCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	//CLEAN: SHOULD BE SMOOTHER WAY OF DOING THIS...
 	if (isDashing) {
 		GetCharacterMovement()->Velocity = dashVelocity * dashSpeed;
 
 		if ((GetActorLocation() - dashLocation).Size() > dashDistance) {
 			isDashing = false;
 			GetCharacterMovement()->Velocity = FVector::ZeroVector;
+			GetWorldTimerManager().SetTimer(CountdownTimerHandle, this, &AFastPacedFPSGameCharacter::MovementCoolDownManager, DashCooldownTime, false);
 		}
 
 	} else if (isGrappling) {
@@ -131,7 +133,9 @@ void AFastPacedFPSGameCharacter::SetupPlayerInputComponent(UInputComponent* Play
 
 void AFastPacedFPSGameCharacter::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
+	//CLEAN: SHOULD BE SMOOTHER WAY OF DOING THIS...
 	leanDireciton = 1;
+	ImpactNormal = SweepResult.ImpactNormal;
 
 	if (OtherActor->ActorHasTag("WallRunnable")) {
 		GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Red, TEXT("Wall Run Start!"));
@@ -266,36 +270,52 @@ void AFastPacedFPSGameCharacter::Attack()
 
 		isAttacking = true;
 
-		GetWorldTimerManager().SetTimer(CountdownTimerHandle, this, &AFastPacedFPSGameCharacter::Timer, 0.0f, true);
+		GetWorldTimerManager().SetTimer(CountdownTimerHandle, this, &AFastPacedFPSGameCharacter::MovementCoolDownManager, attackCooldownTime, false);
 
+		GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Blue, TEXT("YES"));
 	}
 
 }
 
 void AFastPacedFPSGameCharacter::Dash()
 {
-	dashVelocity = GetCharacterMovement()->GetLastInputVector().GetSafeNormal();
+	if (CanDash) {
+		dashVelocity = GetCharacterMovement()->GetLastInputVector().GetSafeNormal();
 
-	if (dashVelocity == FVector::ZeroVector) {
-		dashVelocity = GetFirstPersonCameraComponent()->GetForwardVector().GetSafeNormal();
+		if (dashVelocity == FVector::ZeroVector) {
+			dashVelocity = GetFirstPersonCameraComponent()->GetForwardVector().GetSafeNormal();
+		}
+
+		dashLocation = GetActorLocation();
+
+		isDashing = true;
+		CanDash = false;
 	}
 
-	dashLocation = GetActorLocation();
-
-	isDashing = true;
 }
 
-void AFastPacedFPSGameCharacter::Timer()
+void AFastPacedFPSGameCharacter::MovementCoolDownManager()
 {
-	--attackCooldownTime;
+	GetWorldTimerManager().ClearTimer(CountdownTimerHandle);
 
-	if (attackCooldownTime < 0)
-	{
-		attackCooldownTime = 3;
-		GetWorldTimerManager().ClearTimer(CountdownTimerHandle);
-
+	if (isAttacking) {
 		isAttacking = false;
+		return;
 	}
+	
+	if (!CanDash) {
+		CanDash =true;
+		return;
+	}
+}
+
+void AFastPacedFPSGameCharacter::LaunchPlayer(float Amount)
+{
+	Super::LaunchCharacter(ImpactNormal * Amount, true, true);
+	isGrappling = false;
+	isDashing = false;
+	isWallRunning = false;
+
 }
 
 void AFastPacedFPSGameCharacter::Jump()

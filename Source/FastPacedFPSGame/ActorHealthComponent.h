@@ -6,8 +6,9 @@
 #include "Components/ActorComponent.h"
 #include "ActorHealthComponent.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnTakeDamageDelegate);
 
-UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
+UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent), Blueprintable )
 class FASTPACEDFPSGAME_API UActorHealthComponent : public UActorComponent
 {
 	GENERATED_BODY()
@@ -15,6 +16,10 @@ class FASTPACEDFPSGAME_API UActorHealthComponent : public UActorComponent
 public:	
 	// Sets default values for this component's properties
 	UActorHealthComponent();
+
+	UPROPERTY(BlueprintAssignable, Category="Health")
+	FOnTakeDamageDelegate OnTakeDamageDelagate;
+
 
 protected:
 	// Called when the game starts

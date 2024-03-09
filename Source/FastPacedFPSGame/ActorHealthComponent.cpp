@@ -39,22 +39,7 @@ void UActorHealthComponent::TakeDamage(AActor* DamagedActor, float Damage, const
 
 	Health = FMath::Clamp(Health - Damage, 0.0f, DefaultHealth);
 
-	//if we are the player character, apply an impulse force backwards
-	if (Cast<AFastPacedFPSGameCharacter>(GetOwner())) {
-
-
-		//Knockback
-		ACharacter* Character = Cast<ACharacter>(GetOwner());
-
-		if (Character)
-		{
-			FString TheFloatStr = FString::SanitizeFloat(Health);
-			GEngine->AddOnScreenDebugMessage(-1, 1.0, FColor::Red, *TheFloatStr);
-			FVector Direction = (GetOwner()->GetActorUpVector()).GetSafeNormal() * 100;
-			Character->LaunchCharacter(Direction, true, true);
-		}
-
-	}
+	OnTakeDamageDelagate.Broadcast();
 }
 
 

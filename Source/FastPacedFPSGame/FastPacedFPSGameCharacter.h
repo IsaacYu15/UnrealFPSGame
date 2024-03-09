@@ -53,6 +53,7 @@ protected:
 
 public:
 		
+	//CLEAN: ORGANIZE VARIABLES
 	virtual void Tick(float DeltaTime) override;
 
 	/** Look Input Action */
@@ -110,6 +111,9 @@ public:
 	UPROPERTY(EditAnywhere)
 	int32 attackCooldownTime = 3;
 
+	UPROPERTY(EditAnywhere)
+	int32 DashCooldownTime = 1;
+
 	FTimerHandle CountdownTimerHandle;
 
 	UPROPERTY()
@@ -123,6 +127,9 @@ public:
 
 	UPROPERTY(EditAnywhere)
 	float dashDistance;
+
+	UPROPERTY()
+	bool CanDash = true;
 
 
 
@@ -162,10 +169,15 @@ public:
 	void OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
 	UFUNCTION()
-	void Timer();
+	void MovementCoolDownManager();
+
+	UFUNCTION(BlueprintCallable)
+	void LaunchPlayer(float Amount);
 
 private: 
 
+	UPROPERTY()
+	FVector ImpactNormal = FVector::UpVector;
 	
 };
 
