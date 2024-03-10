@@ -112,10 +112,10 @@ public:
 	/*TIMING*/
 
 	UPROPERTY(EditAnywhere, Category = "CoolDowns")
-	int32 attackCooldownTime = 3;
+	float attackCooldownTime = 3;
 
 	UPROPERTY(EditAnywhere, Category = "CoolDowns")
-	int32 DashCooldownTime = 1;
+	float DashCooldownTime = 1;
 
 	FTimerHandle CountdownTimerHandle;
 	
