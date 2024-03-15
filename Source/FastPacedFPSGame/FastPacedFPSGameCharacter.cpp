@@ -12,6 +12,7 @@
 #include "InputActionValue.h"
 #include "Engine/LocalPlayer.h"
 #include "Math/Vector.h"
+#include "Engine/DamageEvents.h"
 
 #include "Engine/Engine.h"
 
@@ -265,7 +266,8 @@ void AFastPacedFPSGameCharacter::Attack()
 
 		if (Hit.bBlockingHit && IsValid(Hit.GetActor()))
 		{
-			GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Blue, TEXT("Hit"));
+			TSubclassOf<UDamageType> DmgTypeClass = UDamageType::StaticClass(); //damage type maybe necessary later down the line
+			Hit.GetActor()->TakeDamage(AttackDamage, FDamageEvent(DmgTypeClass), nullptr, this->GetOwner());
 		}
 
 		isAttacking = true;

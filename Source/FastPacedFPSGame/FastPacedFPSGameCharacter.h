@@ -105,6 +105,8 @@ public:
 	bool isGrappling;
 
 	/*ATTACKING*/
+	UPROPERTY(EditAnywhere, Category = "Attacking")
+	float AttackDamage = 50;
 
 	UPROPERTY(BlueprintReadOnly, Category = "Attacking")
 	bool isAttacking;
