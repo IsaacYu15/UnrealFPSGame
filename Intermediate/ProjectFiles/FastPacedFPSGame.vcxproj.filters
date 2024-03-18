@@ -86,6 +86,12 @@
     <ClInclude Include="..\..\Source\FastPacedFPSGame\FastPacedFPSGameProjectile.h">
       <Filter>Source\FastPacedFPSGame</Filter>
     </ClInclude>
+    <ClCompile Include="..\..\Source\FastPacedFPSGame\LVL_INGR_LerpBetweenPoints.cpp">
+      <Filter>Source\FastPacedFPSGame</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\FastPacedFPSGame\LVL_INGR_LerpBetweenPoints.h">
+      <Filter>Source\FastPacedFPSGame</Filter>
+    </ClInclude>
     <ClCompile Include="..\..\Source\FastPacedFPSGame\TestClass.cpp">
       <Filter>Source\FastPacedFPSGame</Filter>
     </ClCompile>

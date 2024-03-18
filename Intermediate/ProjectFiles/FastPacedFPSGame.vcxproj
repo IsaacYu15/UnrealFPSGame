@@ -246,6 +246,12 @@
       <AdditionalOptions>$(ClCompile_AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <ClInclude Include="..\..\Source\FastPacedFPSGame\FastPacedFPSGameProjectile.h"/>
+    <ClCompile Include="..\..\Source\FastPacedFPSGame\LVL_INGR_LerpBetweenPoints.cpp">
+      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles)</ForcedIncludeFiles>
+      <AdditionalOptions>$(ClCompile_AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\FastPacedFPSGame\LVL_INGR_LerpBetweenPoints.h"/>
     <ClCompile Include="..\..\Source\FastPacedFPSGame\TestClass.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles)</ForcedIncludeFiles>

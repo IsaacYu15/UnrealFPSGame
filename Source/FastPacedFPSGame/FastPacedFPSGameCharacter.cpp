@@ -170,9 +170,18 @@ void AFastPacedFPSGameCharacter::OnOverlapBegin(UPrimitiveComponent* OverlappedC
 
 	}
 
-	isGrappling = false;
-	isDashing = false;
+	//Reset other states
+	if (isGrappling) {
+		isGrappling = false;
+		GetCharacterMovement()->GravityScale = 1;
+	}
 
+	if (isDashing) {
+		isDashing = false;
+
+		GetCharacterMovement()->Velocity = FVector::ZeroVector;
+		GetWorldTimerManager().SetTimer(CountdownTimerHandle, this, &AFastPacedFPSGameCharacter::MovementCoolDownManager, DashCooldownTime, false);
+	}
 }
 
 void AFastPacedFPSGameCharacter::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
