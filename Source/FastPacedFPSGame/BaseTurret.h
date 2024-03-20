@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Components/StaticMeshComponent.h"
 #include "GameFramework/Actor.h"
 #include "BaseTurret.generated.h"
 
@@ -20,7 +21,18 @@ protected:
 	virtual void BeginPlay() override;
 
 public:	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	float Radius = 200;
+
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UStaticMeshComponent* HeadRef;
+
+private: 
+	bool PlayerInAttackRadius(FVector PlayerPosition);
+
+	void TrackPlayer(FVector PlayerPosition);
 
 };

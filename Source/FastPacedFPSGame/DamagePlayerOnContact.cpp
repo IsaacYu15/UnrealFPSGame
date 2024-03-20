@@ -37,6 +37,8 @@ void UDamagePlayerOnContact::BeginPlay()
 
 	}
 
+
+
 	// ...
 	
 }

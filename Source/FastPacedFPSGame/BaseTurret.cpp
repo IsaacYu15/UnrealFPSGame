@@ -1,5 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
+#include "Kismet/KismetMathLibrary.h"
 
 #include "BaseTurret.h"
 
@@ -23,5 +24,30 @@ void ABaseTurret::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	FVector PlayerPosition = GetWorld()->GetFirstPlayerController()->GetPawn()->GetActorLocation();
+
+	if (PlayerInAttackRadius(PlayerPosition))
+	{
+		TrackPlayer(PlayerPosition);
+	}
+
+}
+
+bool ABaseTurret::PlayerInAttackRadius(FVector PlayerPosition)
+{
+	float Distance = (PlayerPosition - GetActorLocation()).Size();
+
+	if (Distance < Radius) 
+	{
+		return true;
+	}
+
+	return false;
+}
+
+void ABaseTurret::TrackPlayer(FVector PlayerPosition)
+{
+	FRotator LookAtRotation = UKismetMathLibrary::FindLookAtRotation(GetActorLocation(), PlayerPosition);
+	HeadRef->SetWorldRotation(LookAtRotation);
 }
 
