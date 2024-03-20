@@ -4,7 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include <Components/ArrowComponent.h>
+
 #include "LVL_INGR_LerpBetweenPoints.generated.h"
+
 
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
@@ -34,6 +37,10 @@ public:
 
 	UPROPERTY(BlueprintReadOnly, EditAnywhere)
 	bool Looping;
+
+	UPROPERTY()
+	UArrowComponent* Arrow;
+
 
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;

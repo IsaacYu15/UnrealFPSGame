@@ -11,11 +11,6 @@ ULVL_INGR_LerpBetweenPoints::ULVL_INGR_LerpBetweenPoints()
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
 
-	if (GetOwner())
-	{
-		StartLocation = GetOwner()->GetActorLocation();
-		EndLocation = StartLocation + GetOwner()->GetActorForwardVector() * Range;
-	}
 }
 
 
@@ -23,6 +18,22 @@ ULVL_INGR_LerpBetweenPoints::ULVL_INGR_LerpBetweenPoints()
 void ULVL_INGR_LerpBetweenPoints::BeginPlay()
 {
 	Super::BeginPlay();
+
+	if (GetOwner())
+	{
+		StartLocation = GetOwner()->GetActorLocation();
+
+		Arrow = GetOwner()->FindComponentByClass<UArrowComponent>();
+		if (Arrow == nullptr)
+		{
+			EndLocation = StartLocation + GetOwner()->GetActorForwardVector() * Range;
+		}
+		else
+		{
+			EndLocation = StartLocation + Arrow->GetForwardVector() * Range;
+		}
+
+	}
 
 }
 
