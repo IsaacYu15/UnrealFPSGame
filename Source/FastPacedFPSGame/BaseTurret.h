@@ -24,15 +24,28 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	float Radius = 200;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	float RotationSpeed = 1.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	float FireRate = 1.0f;
+
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UStaticMeshComponent* HeadRef;
 
+	virtual void Fire();
+
+protected:
+	FTimerHandle FireTimeHandle;
+
 private: 
+	float TimeElapsed;
+
 	bool PlayerInAttackRadius(FVector PlayerPosition);
 
-	void TrackPlayer(FVector PlayerPosition);
+	void TrackPlayer(FVector PlayerPosition, float Alpha);
 
 };

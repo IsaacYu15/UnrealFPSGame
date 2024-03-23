@@ -28,9 +28,20 @@ void ABaseTurret::Tick(float DeltaTime)
 
 	if (PlayerInAttackRadius(PlayerPosition))
 	{
-		TrackPlayer(PlayerPosition);
+		TrackPlayer(PlayerPosition, DeltaTime);
+
+		if (!GetWorldTimerManager().IsTimerActive(ABaseTurret::FireTimeHandle))
+		{
+			GetWorldTimerManager().SetTimer(FireTimeHandle, this, &ABaseTurret::Fire, FireRate, false);
+		}
+
 	}
 
+}
+
+void ABaseTurret::Fire()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("FIRE"));
 }
 
 bool ABaseTurret::PlayerInAttackRadius(FVector PlayerPosition)
@@ -45,9 +56,12 @@ bool ABaseTurret::PlayerInAttackRadius(FVector PlayerPosition)
 	return false;
 }
 
-void ABaseTurret::TrackPlayer(FVector PlayerPosition)
+void ABaseTurret::TrackPlayer(FVector PlayerPosition, float Alpha)
 {
-	FRotator LookAtRotation = UKismetMathLibrary::FindLookAtRotation(GetActorLocation(), PlayerPosition);
-	HeadRef->SetWorldRotation(LookAtRotation);
+	FRotator TargetRotation = UKismetMathLibrary::FindLookAtRotation(GetActorLocation(), PlayerPosition);
+	
+	FRotator InterpolatedRotation = FMath::RInterpTo(HeadRef->GetRelativeTransform().GetRotation().Rotator(), TargetRotation, Alpha, RotationSpeed);
+	
+	HeadRef->SetRelativeRotation(InterpolatedRotation);
 }
 
