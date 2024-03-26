@@ -30,10 +30,12 @@ void ABaseTurret::Tick(float DeltaTime)
 	{
 		TrackPlayer(PlayerPosition, DeltaTime);
 
+		/*
 		if (!GetWorldTimerManager().IsTimerActive(ABaseTurret::FireTimeHandle))
 		{
 			GetWorldTimerManager().SetTimer(FireTimeHandle, this, &ABaseTurret::Fire, FireRate, false);
 		}
+		*/
 
 	}
 

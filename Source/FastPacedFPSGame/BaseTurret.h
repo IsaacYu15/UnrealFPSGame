@@ -41,11 +41,13 @@ public:
 protected:
 	FTimerHandle FireTimeHandle;
 
-private: 
-	float TimeElapsed;
-
 	bool PlayerInAttackRadius(FVector PlayerPosition);
 
 	void TrackPlayer(FVector PlayerPosition, float Alpha);
+
+private: 
+	float TimeElapsed;
+
+
 
 };
