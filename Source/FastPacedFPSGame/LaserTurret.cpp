@@ -1,10 +1,14 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 #include "NiagaraFunctionLibrary.h"
 #include "NiagaraComponent.h"
+#include "Components/SceneComponent.h"
 #include "LaserTurret.h"
 
 ALaserTurret::ALaserTurret()
 {
+	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
+	SetRootComponent(RootComponent);
+
 	LaserBeamVFXRef = CreateDefaultSubobject<UNiagaraComponent>(TEXT("VFX_LaserBeam"));
 	LaserImpactVFXRef = CreateDefaultSubobject<UNiagaraComponent>(TEXT("VFX_LaserImpact"));
 
@@ -23,6 +27,12 @@ void ALaserTurret::UpdateLaser()
 
 	if (Hit.bBlockingHit)
 	{
+		LaserBeamVFXRef->SetVectorParameter("LaserEnd", Hit.ImpactPoint);
+		Damage(DamageAmount, Hit.GetActor());
+	}
+	else
+	{
+		LaserBeamVFXRef->SetVectorParameter("LaserEnd", TraceEnd);
 	}
 }
 

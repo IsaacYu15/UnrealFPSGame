@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Kismet/KismetMathLibrary.h"
+#include "Engine/DamageEvents.h"
 
 #include "BaseTurret.h"
 
@@ -61,9 +62,14 @@ bool ABaseTurret::PlayerInAttackRadius(FVector PlayerPosition)
 void ABaseTurret::TrackPlayer(FVector PlayerPosition, float Alpha)
 {
 	FRotator TargetRotation = UKismetMathLibrary::FindLookAtRotation(GetActorLocation(), PlayerPosition);
-	
 	FRotator InterpolatedRotation = FMath::RInterpTo(HeadRef->GetRelativeTransform().GetRotation().Rotator(), TargetRotation, Alpha, RotationSpeed);
 	
 	HeadRef->SetRelativeRotation(InterpolatedRotation);
+}
+
+void ABaseTurret::Damage(float Damage, AActor* OtherActor)
+{
+	TSubclassOf<UDamageType> DmgTypeClass = UDamageType::StaticClass(); //damage type maybe necessary later down the line
+	OtherActor->TakeDamage(Damage, FDamageEvent(DmgTypeClass), nullptr, this->GetOwner());
 }
 

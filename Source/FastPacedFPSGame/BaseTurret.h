@@ -30,6 +30,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	float FireRate = 1.0f;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	float DamageAmount = 1.0f;
+
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
@@ -44,6 +47,8 @@ protected:
 	bool PlayerInAttackRadius(FVector PlayerPosition);
 
 	void TrackPlayer(FVector PlayerPosition, float Alpha);
+
+	void Damage(float Damage, AActor* OtherActor);
 
 private: 
 	float TimeElapsed;

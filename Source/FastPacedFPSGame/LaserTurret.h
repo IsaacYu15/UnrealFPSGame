@@ -33,5 +33,8 @@ public:
 public:
 	UFUNCTION(BlueprintCallable, Category = "Laser")
 	void UpdateLaser();
+
+private:
+	USceneComponent* RootComponent;
 	
 };
