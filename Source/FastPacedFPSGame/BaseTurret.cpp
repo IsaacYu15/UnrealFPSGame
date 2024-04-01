@@ -30,21 +30,8 @@ void ABaseTurret::Tick(float DeltaTime)
 	if (PlayerInAttackRadius(PlayerPosition))
 	{
 		TrackPlayer(PlayerPosition, DeltaTime);
-
-		/*
-		if (!GetWorldTimerManager().IsTimerActive(ABaseTurret::FireTimeHandle))
-		{
-			GetWorldTimerManager().SetTimer(FireTimeHandle, this, &ABaseTurret::Fire, FireRate, false);
-		}
-		*/
-
 	}
 
-}
-
-void ABaseTurret::Fire()
-{
-	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("FIRE"));
 }
 
 bool ABaseTurret::PlayerInAttackRadius(FVector PlayerPosition)

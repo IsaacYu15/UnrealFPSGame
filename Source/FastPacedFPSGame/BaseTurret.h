@@ -39,8 +39,6 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UStaticMeshComponent* HeadRef;
 
-	virtual void Fire();
-
 protected:
 	FTimerHandle FireTimeHandle;
 

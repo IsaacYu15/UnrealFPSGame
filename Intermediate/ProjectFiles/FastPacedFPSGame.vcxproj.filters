@@ -92,10 +92,22 @@
     <ClInclude Include="..\..\Source\FastPacedFPSGame\FastPacedFPSGameProjectile.h">
       <Filter>Source\FastPacedFPSGame</Filter>
     </ClInclude>
+    <ClCompile Include="..\..\Source\FastPacedFPSGame\LaserTurret.cpp">
+      <Filter>Source\FastPacedFPSGame</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\FastPacedFPSGame\LaserTurret.h">
+      <Filter>Source\FastPacedFPSGame</Filter>
+    </ClInclude>
     <ClCompile Include="..\..\Source\FastPacedFPSGame\LVL_INGR_LerpBetweenPoints.cpp">
       <Filter>Source\FastPacedFPSGame</Filter>
     </ClCompile>
     <ClInclude Include="..\..\Source\FastPacedFPSGame\LVL_INGR_LerpBetweenPoints.h">
+      <Filter>Source\FastPacedFPSGame</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\FastPacedFPSGame\ProjectileTurret.cpp">
+      <Filter>Source\FastPacedFPSGame</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\FastPacedFPSGame\ProjectileTurret.h">
       <Filter>Source\FastPacedFPSGame</Filter>
     </ClInclude>
     <ClCompile Include="..\..\Source\FastPacedFPSGame\TestClass.cpp">
