@@ -38,7 +38,14 @@ bool ABaseTurret::PlayerInAttackRadius(FVector PlayerPosition)
 {
 	float Distance = (PlayerPosition - GetActorLocation()).Size();
 
-	if (Distance < Radius) 
+	FHitResult Hit;
+	FCollisionQueryParams QueryParams;
+	QueryParams.AddIgnoredActor(this);
+	QueryParams.AddIgnoredActor(GetWorld()->GetFirstPlayerController()->GetPawn());
+
+	GetWorld()->LineTraceSingleByChannel(Hit, GetActorLocation(), PlayerPosition, ECC_Pawn, QueryParams);
+
+	if (Distance < Radius && !Hit.bBlockingHit) 
 	{
 		return true;
 	}
