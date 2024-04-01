@@ -32,7 +32,8 @@ protected:
 	float Health;
 
 	UFUNCTION()
-	void TakeDamage(AActor* DamagedActor, float Damage, const class UDamageType* DamageType, class AController* InstigatedBy, AActor* DamageCauser);
+	void TakeDamage(AActor* DamagedActor, float Damage, const class UDamageType* DamageType, 
+					class AController* InstigatedBy, AActor* DamageCauser);
 
 
 		

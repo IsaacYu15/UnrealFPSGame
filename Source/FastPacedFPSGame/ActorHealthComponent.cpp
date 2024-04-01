@@ -32,14 +32,23 @@ void UActorHealthComponent::BeginPlay()
 //ADD KNOCKBACK AND DAMAGE INTO THE PARAMETERS
 void UActorHealthComponent::TakeDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser)
 {
-
 	if (Damage <= 0) {
 		return;
+	}
+
+	if (AFastPacedFPSGameCharacter* Player = Cast< AFastPacedFPSGameCharacter>(this->GetOwner()))
+	{
+		if (Player->isBlocking)
+		{
+			//knockback
+			return;
+		}
 	}
 
 	Health = FMath::Clamp(Health - Damage, 0.0f, DefaultHealth);
 
 	OnTakeDamageDelagate.Broadcast();
+
 }
 
 

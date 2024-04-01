@@ -125,6 +125,9 @@ void AFastPacedFPSGameCharacter::SetupPlayerInputComponent(UInputComponent* Play
 
 		//Dash
 		EnhancedInputComponent->BindAction(DashAction, ETriggerEvent::Started, this, &AFastPacedFPSGameCharacter::Dash);
+
+		//Block
+		EnhancedInputComponent->BindAction(BlockAction, ETriggerEvent::Started, this, &AFastPacedFPSGameCharacter::Block);
 	}
 	else
 	{
@@ -282,8 +285,6 @@ void AFastPacedFPSGameCharacter::Attack()
 		isAttacking = true;
 
 		GetWorldTimerManager().SetTimer(CountdownTimerHandle, this, &AFastPacedFPSGameCharacter::MovementCoolDownManager, attackCooldownTime, false);
-
-		GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Blue, TEXT("YES"));
 	}
 
 }
@@ -305,28 +306,46 @@ void AFastPacedFPSGameCharacter::Dash()
 
 }
 
+void AFastPacedFPSGameCharacter::Block()
+{
+	if (CanBlock && !isDashing && !isGrappling)
+	{
+		CanBlock = false;
+		isBlocking = true;
+
+		GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Blue, TEXT("YES"));
+
+		GetWorldTimerManager().SetTimer(BlockTimerHandle, this, &AFastPacedFPSGameCharacter::ResetBlocking, BlockingTime, false);
+	}
+}
+
+void AFastPacedFPSGameCharacter::ResetBlocking()
+{
+	isBlocking = false;
+	CanDash = true;
+
+	GetWorldTimerManager().SetTimer(CountdownTimerHandle, this, &AFastPacedFPSGameCharacter::MovementCoolDownManager, BlockCooldownTime, false);
+}
+
 void AFastPacedFPSGameCharacter::MovementCoolDownManager()
 {
 	GetWorldTimerManager().ClearTimer(CountdownTimerHandle);
 
 	if (isAttacking) {
 		isAttacking = false;
-		return;
-	}
-	
-	if (!CanDash) {
+	}else if (!CanDash) {
 		CanDash =true;
-		return;
+	}else if (!CanBlock) {
+		CanBlock = true;
 	}
 }
 
-void AFastPacedFPSGameCharacter::LaunchPlayer(float Amount)
+void AFastPacedFPSGameCharacter::LaunchPlayer(float Amount, FVector Direction)
 {
-	Super::LaunchCharacter(ImpactNormal * Amount, true, true);
+	Super::LaunchCharacter(Direction * Amount, true, true);
 	isGrappling = false;
 	isDashing = false;
 	isWallRunning = false;
-
 }
 
 void AFastPacedFPSGameCharacter::Jump()

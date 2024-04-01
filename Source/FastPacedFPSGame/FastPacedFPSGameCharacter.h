@@ -66,6 +66,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	class UInputAction* DashAction;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	class UInputAction* BlockAction;
+
 	/** Bool for AnimBP to switch to another animation set */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Weapon)
 	bool bHasRifle;
@@ -119,7 +122,13 @@ public:
 	UPROPERTY(EditAnywhere, Category = "CoolDowns")
 	float DashCooldownTime = 1;
 
+	UPROPERTY(EditAnywhere, Category = "CoolDowns")
+	float BlockCooldownTime = 1.5;
+
+
 	FTimerHandle CountdownTimerHandle;
+
+	FTimerHandle BlockTimerHandle;
 	
 	/*DASHING*/
 	UPROPERTY()
@@ -140,6 +149,14 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category = "Dashing")
 	bool isDashing;
 
+	UPROPERTY(BlueprintReadOnly, Category = "Blocking")
+	bool CanBlock = true;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Blocking")
+	bool isBlocking = false;
+
+	UPROPERTY(EditAnywhere, Category = "Blocking")
+	float BlockingTime = 0.5;
 
 
 protected:
@@ -157,6 +174,11 @@ protected:
 
 	/** Called for dash movement */
 	void Dash();
+
+	/** Called for block */
+	void Block();
+
+	void ResetBlocking();
 	
 
 protected:
@@ -181,7 +203,7 @@ public:
 	void MovementCoolDownManager();
 
 	UFUNCTION(BlueprintCallable)
-	void LaunchPlayer(float Amount);
+	void LaunchPlayer(float Amount, FVector Direction);
 
 private: 
 
