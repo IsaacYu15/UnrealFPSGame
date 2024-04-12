@@ -21,8 +21,66 @@ void EmptyLinkFunctionForGeneratedCodeFastPacedFPSGameCharacter() {}
 	ENHANCEDINPUT_API UClass* Z_Construct_UClass_UInputMappingContext_NoRegister();
 	FASTPACEDFPSGAME_API UClass* Z_Construct_UClass_AFastPacedFPSGameCharacter();
 	FASTPACEDFPSGAME_API UClass* Z_Construct_UClass_AFastPacedFPSGameCharacter_NoRegister();
+	FASTPACEDFPSGAME_API UEnum* Z_Construct_UEnum_FastPacedFPSGame_State();
 	UPackage* Z_Construct_UPackage__Script_FastPacedFPSGame();
 // End Cross Module References
+	static FEnumRegistrationInfo Z_Registration_Info_UEnum_State;
+	static UEnum* State_StaticEnum()
+	{
+		if (!Z_Registration_Info_UEnum_State.OuterSingleton)
+		{
+			Z_Registration_Info_UEnum_State.OuterSingleton = GetStaticEnum(Z_Construct_UEnum_FastPacedFPSGame_State, (UObject*)Z_Construct_UPackage__Script_FastPacedFPSGame(), TEXT("State"));
+		}
+		return Z_Registration_Info_UEnum_State.OuterSingleton;
+	}
+	template<> FASTPACEDFPSGAME_API UEnum* StaticEnum<State>()
+	{
+		return State_StaticEnum();
+	}
+	struct Z_Construct_UEnum_FastPacedFPSGame_State_Statics
+	{
+		static const UECodeGen_Private::FEnumeratorParam Enumerators[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Enum_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FEnumParams EnumParams;
+	};
+	const UECodeGen_Private::FEnumeratorParam Z_Construct_UEnum_FastPacedFPSGame_State_Statics::Enumerators[] = {
+		{ "State::Dashing", (int64)State::Dashing },
+		{ "State::Attacking", (int64)State::Attacking },
+		{ "State::Grappling", (int64)State::Grappling },
+		{ "State::WallRunning", (int64)State::WallRunning },
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UEnum_FastPacedFPSGame_State_Statics::Enum_MetaDataParams[] = {
+		{ "Attacking.Name", "State::Attacking" },
+		{ "BlueprintType", "true" },
+		{ "Dashing.Name", "State::Dashing" },
+		{ "Grappling.Name", "State::Grappling" },
+		{ "ModuleRelativePath", "FastPacedFPSGameCharacter.h" },
+		{ "WallRunning.Name", "State::WallRunning" },
+	};
+#endif
+	const UECodeGen_Private::FEnumParams Z_Construct_UEnum_FastPacedFPSGame_State_Statics::EnumParams = {
+		(UObject*(*)())Z_Construct_UPackage__Script_FastPacedFPSGame,
+		nullptr,
+		"State",
+		"State",
+		Z_Construct_UEnum_FastPacedFPSGame_State_Statics::Enumerators,
+		RF_Public|RF_Transient|RF_MarkAsNative,
+		UE_ARRAY_COUNT(Z_Construct_UEnum_FastPacedFPSGame_State_Statics::Enumerators),
+		EEnumFlags::None,
+		(uint8)UEnum::ECppForm::EnumClass,
+		METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UEnum_FastPacedFPSGame_State_Statics::Enum_MetaDataParams), Z_Construct_UEnum_FastPacedFPSGame_State_Statics::Enum_MetaDataParams)
+	};
+	UEnum* Z_Construct_UEnum_FastPacedFPSGame_State()
+	{
+		if (!Z_Registration_Info_UEnum_State.InnerSingleton)
+		{
+			UECodeGen_Private::ConstructUEnum(Z_Registration_Info_UEnum_State.InnerSingleton, Z_Construct_UEnum_FastPacedFPSGame_State_Statics::EnumParams);
+		}
+		return Z_Registration_Info_UEnum_State.InnerSingleton;
+	}
 	DEFINE_FUNCTION(AFastPacedFPSGameCharacter::execLaunchPlayer)
 	{
 		P_GET_PROPERTY(FFloatProperty,Z_Param_Amount);
@@ -422,9 +480,9 @@ void EmptyLinkFunctionForGeneratedCodeFastPacedFPSGameCharacter() {}
 #endif
 		static const UECodeGen_Private::FStructPropertyParams NewProp_grappleVelocity;
 #if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_grappleLocation_MetaData[];
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_GrappleActor_MetaData[];
 #endif
-		static const UECodeGen_Private::FStructPropertyParams NewProp_grappleLocation;
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_GrappleActor;
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_grappleSpeed_MetaData[];
 #endif
@@ -726,11 +784,11 @@ void EmptyLinkFunctionForGeneratedCodeFastPacedFPSGameCharacter() {}
 #endif
 	const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_AFastPacedFPSGameCharacter_Statics::NewProp_grappleVelocity = { "grappleVelocity", nullptr, (EPropertyFlags)0x0010000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFastPacedFPSGameCharacter, grappleVelocity), Z_Construct_UScriptStruct_FVector, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AFastPacedFPSGameCharacter_Statics::NewProp_grappleVelocity_MetaData), Z_Construct_UClass_AFastPacedFPSGameCharacter_Statics::NewProp_grappleVelocity_MetaData) };
 #if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AFastPacedFPSGameCharacter_Statics::NewProp_grappleLocation_MetaData[] = {
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AFastPacedFPSGameCharacter_Statics::NewProp_GrappleActor_MetaData[] = {
 		{ "ModuleRelativePath", "FastPacedFPSGameCharacter.h" },
 	};
 #endif
-	const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_AFastPacedFPSGameCharacter_Statics::NewProp_grappleLocation = { "grappleLocation", nullptr, (EPropertyFlags)0x0010000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFastPacedFPSGameCharacter, grappleLocation), Z_Construct_UScriptStruct_FVector, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AFastPacedFPSGameCharacter_Statics::NewProp_grappleLocation_MetaData), Z_Construct_UClass_AFastPacedFPSGameCharacter_Statics::NewProp_grappleLocation_MetaData) };
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AFastPacedFPSGameCharacter_Statics::NewProp_GrappleActor = { "GrappleActor", nullptr, (EPropertyFlags)0x0010000000000000, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFastPacedFPSGameCharacter, GrappleActor), Z_Construct_UClass_AActor_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AFastPacedFPSGameCharacter_Statics::NewProp_GrappleActor_MetaData), Z_Construct_UClass_AFastPacedFPSGameCharacter_Statics::NewProp_GrappleActor_MetaData) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AFastPacedFPSGameCharacter_Statics::NewProp_grappleSpeed_MetaData[] = {
 		{ "Category", "Grappling" },
@@ -748,7 +806,7 @@ void EmptyLinkFunctionForGeneratedCodeFastPacedFPSGameCharacter() {}
 	{
 		((AFastPacedFPSGameCharacter*)Obj)->isGrappling = 1;
 	}
-	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_AFastPacedFPSGameCharacter_Statics::NewProp_isGrappling = { "isGrappling", nullptr, (EPropertyFlags)0x0010000000000014, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(AFastPacedFPSGameCharacter), &Z_Construct_UClass_AFastPacedFPSGameCharacter_Statics::NewProp_isGrappling_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AFastPacedFPSGameCharacter_Statics::NewProp_isGrappling_MetaData), Z_Construct_UClass_AFastPacedFPSGameCharacter_Statics::NewProp_isGrappling_MetaData) };
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_AFastPacedFPSGameCharacter_Statics::NewProp_isGrappling = { "isGrappling", nullptr, (EPropertyFlags)0x0010000000000004, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(AFastPacedFPSGameCharacter), &Z_Construct_UClass_AFastPacedFPSGameCharacter_Statics::NewProp_isGrappling_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AFastPacedFPSGameCharacter_Statics::NewProp_isGrappling_MetaData), Z_Construct_UClass_AFastPacedFPSGameCharacter_Statics::NewProp_isGrappling_MetaData) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AFastPacedFPSGameCharacter_Statics::NewProp_AttackDamage_MetaData[] = {
 		{ "Category", "Attacking" },
@@ -852,7 +910,7 @@ void EmptyLinkFunctionForGeneratedCodeFastPacedFPSGameCharacter() {}
 	{
 		((AFastPacedFPSGameCharacter*)Obj)->isDashing = 1;
 	}
-	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_AFastPacedFPSGameCharacter_Statics::NewProp_isDashing = { "isDashing", nullptr, (EPropertyFlags)0x0010000000000014, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(AFastPacedFPSGameCharacter), &Z_Construct_UClass_AFastPacedFPSGameCharacter_Statics::NewProp_isDashing_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AFastPacedFPSGameCharacter_Statics::NewProp_isDashing_MetaData), Z_Construct_UClass_AFastPacedFPSGameCharacter_Statics::NewProp_isDashing_MetaData) };
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_AFastPacedFPSGameCharacter_Statics::NewProp_isDashing = { "isDashing", nullptr, (EPropertyFlags)0x0010000000000004, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(AFastPacedFPSGameCharacter), &Z_Construct_UClass_AFastPacedFPSGameCharacter_Statics::NewProp_isDashing_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AFastPacedFPSGameCharacter_Statics::NewProp_isDashing_MetaData), Z_Construct_UClass_AFastPacedFPSGameCharacter_Statics::NewProp_isDashing_MetaData) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AFastPacedFPSGameCharacter_Statics::NewProp_CanBlock_MetaData[] = {
 		{ "Category", "Blocking" },
@@ -907,7 +965,7 @@ void EmptyLinkFunctionForGeneratedCodeFastPacedFPSGameCharacter() {}
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFastPacedFPSGameCharacter_Statics::NewProp_wallJumpOffVelocity,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFastPacedFPSGameCharacter_Statics::NewProp_wallRunVelocity,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFastPacedFPSGameCharacter_Statics::NewProp_grappleVelocity,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFastPacedFPSGameCharacter_Statics::NewProp_grappleLocation,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFastPacedFPSGameCharacter_Statics::NewProp_GrappleActor,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFastPacedFPSGameCharacter_Statics::NewProp_grappleSpeed,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFastPacedFPSGameCharacter_Statics::NewProp_isGrappling,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFastPacedFPSGameCharacter_Statics::NewProp_AttackDamage,
@@ -961,13 +1019,17 @@ void EmptyLinkFunctionForGeneratedCodeFastPacedFPSGameCharacter() {}
 	AFastPacedFPSGameCharacter::~AFastPacedFPSGameCharacter() {}
 	struct Z_CompiledInDeferFile_FID_Users_yuisa_OneDrive_Documents_Unreal_Projects_FastPacedFPSGame_Source_FastPacedFPSGame_FastPacedFPSGameCharacter_h_Statics
 	{
+		static const FEnumRegisterCompiledInInfo EnumInfo[];
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
-	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_yuisa_OneDrive_Documents_Unreal_Projects_FastPacedFPSGame_Source_FastPacedFPSGame_FastPacedFPSGameCharacter_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AFastPacedFPSGameCharacter, AFastPacedFPSGameCharacter::StaticClass, TEXT("AFastPacedFPSGameCharacter"), &Z_Registration_Info_UClass_AFastPacedFPSGameCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AFastPacedFPSGameCharacter), 3265634697U) },
+	const FEnumRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_yuisa_OneDrive_Documents_Unreal_Projects_FastPacedFPSGame_Source_FastPacedFPSGame_FastPacedFPSGameCharacter_h_Statics::EnumInfo[] = {
+		{ State_StaticEnum, TEXT("State"), &Z_Registration_Info_UEnum_State, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 109136486U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_yuisa_OneDrive_Documents_Unreal_Projects_FastPacedFPSGame_Source_FastPacedFPSGame_FastPacedFPSGameCharacter_h_2276562522(TEXT("/Script/FastPacedFPSGame"),
+	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_yuisa_OneDrive_Documents_Unreal_Projects_FastPacedFPSGame_Source_FastPacedFPSGame_FastPacedFPSGameCharacter_h_Statics::ClassInfo[] = {
+		{ Z_Construct_UClass_AFastPacedFPSGameCharacter, AFastPacedFPSGameCharacter::StaticClass, TEXT("AFastPacedFPSGameCharacter"), &Z_Registration_Info_UClass_AFastPacedFPSGameCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AFastPacedFPSGameCharacter), 1359305992U) },
+	};
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_yuisa_OneDrive_Documents_Unreal_Projects_FastPacedFPSGame_Source_FastPacedFPSGame_FastPacedFPSGameCharacter_h_200663431(TEXT("/Script/FastPacedFPSGame"),
 		Z_CompiledInDeferFile_FID_Users_yuisa_OneDrive_Documents_Unreal_Projects_FastPacedFPSGame_Source_FastPacedFPSGame_FastPacedFPSGameCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_yuisa_OneDrive_Documents_Unreal_Projects_FastPacedFPSGame_Source_FastPacedFPSGame_FastPacedFPSGameCharacter_h_Statics::ClassInfo),
 		nullptr, 0,
-		nullptr, 0);
+		Z_CompiledInDeferFile_FID_Users_yuisa_OneDrive_Documents_Unreal_Projects_FastPacedFPSGame_Source_FastPacedFPSGame_FastPacedFPSGameCharacter_h_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_yuisa_OneDrive_Documents_Unreal_Projects_FastPacedFPSGame_Source_FastPacedFPSGame_FastPacedFPSGameCharacter_h_Statics::EnumInfo));
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

@@ -16,7 +16,17 @@ struct FInputActionValue;
 
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
 
-UCLASS(config=Game)
+
+UENUM(BlueprintType)
+enum class State : uint8 {
+	Dashing = 0,
+	Attacking = 1,
+	Grappling = 2,
+	WallRunning = 3,
+};
+
+UCLASS(config = Game)
+
 class AFastPacedFPSGameCharacter : public ACharacter
 {
 	GENERATED_BODY()
@@ -99,12 +109,12 @@ public:
 	FVector grappleVelocity;
 
 	UPROPERTY()
-	FVector grappleLocation;
+	AActor* GrappleActor = nullptr;
 
 	UPROPERTY(EditAnywhere, Category = "Grappling")
 	float grappleSpeed;
 
-	UPROPERTY(BlueprintReadOnly, Category = "Grappling")
+	UPROPERTY(BlueprintReadWrite, Category = "Grappling")
 	bool isGrappling;
 
 	/*ATTACKING*/
@@ -146,7 +156,7 @@ public:
 	UPROPERTY()
 	bool CanDash = true;
 
-	UPROPERTY(BlueprintReadOnly, Category = "Dashing")
+	UPROPERTY(BlueprintReadWrite, Category = "Dashing")
 	bool isDashing;
 
 	UPROPERTY(BlueprintReadOnly, Category = "Blocking")

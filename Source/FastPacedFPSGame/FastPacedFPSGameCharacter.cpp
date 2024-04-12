@@ -23,10 +23,7 @@ DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 // AFastPacedFPSGameCharacter
 
 AFastPacedFPSGameCharacter::AFastPacedFPSGameCharacter()
-{
-	// Character doesnt have a rifle at start
-	bHasRifle = false;
-	
+{	
 	// Set size for collision capsule
 	GetCapsuleComponent()->InitCapsuleSize(55.f, 96.0f);
 		
@@ -85,7 +82,7 @@ void AFastPacedFPSGameCharacter::Tick(float DeltaTime)
 	} else if (isGrappling) {
 		GetCharacterMovement()->Velocity = grappleVelocity * grappleSpeed;
 
-		if ((GetActorLocation() - grappleLocation).Size() < 500) { //in all fairness, capsule is 55
+		if ((GetActorLocation() - GrappleActor->GetActorLocation()).Size() < 100) { 
 			isGrappling = false;
 			GetCharacterMovement()->GravityScale = 1;
 		}
@@ -247,7 +244,7 @@ void AFastPacedFPSGameCharacter::Grapple()
 			DrawDebugLine(GetWorld(), TraceStart, Hit.ImpactPoint, FColor::Red, false, 1.0f, 0, 10.0f);
 
 			grappleVelocity = GetFirstPersonCameraComponent()->GetForwardVector().GetSafeNormal();
-			grappleLocation = Hit.ImpactPoint;
+			GrappleActor = Hit.GetActor();
 
 			isGrappling = true;
 			GetCharacterMovement()->GravityScale = 0;
