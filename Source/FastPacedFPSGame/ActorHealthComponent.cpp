@@ -38,7 +38,7 @@ void UActorHealthComponent::TakeDamage(AActor* DamagedActor, float Damage, const
 
 	if (AFastPacedFPSGameCharacter* Player = Cast< AFastPacedFPSGameCharacter>(this->GetOwner()))
 	{
-		if (Player->isBlocking)
+		if (Player->MovementState == State::Blocking)
 		{
 			//knockback
 			return;

@@ -128,5 +128,6 @@
     <ClInclude Include="..\..\Source\FastPacedFPSGame\TP_WeaponComponent.h">
       <Filter>Source\FastPacedFPSGame</Filter>
     </ClInclude>
+    <None Include="cpp.hint" />
   </ItemGroup>
 </Project>

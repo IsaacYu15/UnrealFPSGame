@@ -69,25 +69,28 @@ void AFastPacedFPSGameCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	//CLEAN: SHOULD BE SMOOTHER WAY OF DOING THIS...
-	if (isDashing) {
+	if (MovementState == State::Dashing) 
+	{
 		GetCharacterMovement()->Velocity = dashVelocity * dashSpeed;
 
 		if ((GetActorLocation() - dashLocation).Size() > dashDistance) {
-			isDashing = false;
+			MovementState = State::None;
 			GetCharacterMovement()->Velocity = FVector::ZeroVector;
 			GetWorldTimerManager().SetTimer(CountdownTimerHandle, this, &AFastPacedFPSGameCharacter::MovementCoolDownManager, DashCooldownTime, false);
 		}
 
-	} else if (isGrappling) {
+	} 
+	else if (MovementState == State::Grappling) 
+	{
 		GetCharacterMovement()->Velocity = grappleVelocity * grappleSpeed;
 
 		if ((GetActorLocation() - GrappleActor->GetActorLocation()).Size() < 100) { 
-			isGrappling = false;
+			MovementState = State::None;
 			GetCharacterMovement()->GravityScale = 1;
 		}
 
-	} else if (isWallRunning) {
+	} else if (MovementState == State::WallRunning) 
+	{
 		GetCharacterMovement()->Velocity = wallRunVelocity * wallRunSpeed;
 	}
 
@@ -141,7 +144,7 @@ void AFastPacedFPSGameCharacter::OnOverlapBegin(UPrimitiveComponent* OverlappedC
 	if (OtherActor->ActorHasTag("WallRunnable")) {
 		GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Red, TEXT("Wall Run Start!"));
 
-		isWallRunning = true;
+		MovementState = State::WallRunning;
 		GetCharacterMovement()->GravityScale = 0;
 
 		FVector runDir = FVector::CrossProduct(GetActorUpVector(), SweepResult.ImpactNormal);
@@ -171,13 +174,13 @@ void AFastPacedFPSGameCharacter::OnOverlapBegin(UPrimitiveComponent* OverlappedC
 	}
 
 	//Reset other states
-	if (isGrappling) {
-		isGrappling = false;
+	if (MovementState == State::Grappling) {
+		MovementState = State::None;
 		GetCharacterMovement()->GravityScale = 1;
 	}
 
-	if (isDashing) {
-		isDashing = false;
+	if (MovementState == State::Dashing) {
+		MovementState = State::None;
 
 		GetCharacterMovement()->Velocity = FVector::ZeroVector;
 		GetWorldTimerManager().SetTimer(CountdownTimerHandle, this, &AFastPacedFPSGameCharacter::MovementCoolDownManager, DashCooldownTime, false);
@@ -189,7 +192,7 @@ void AFastPacedFPSGameCharacter::OnOverlapEnd(UPrimitiveComponent* OverlappedCom
 	leanDirection = 1;
 	
 	if (OtherActor->ActorHasTag("WallRunnable")) {
-		isWallRunning = false;
+		MovementState = State::None;
 		GetCharacterMovement()->GravityScale = 1.0;
 	}
 }
@@ -201,7 +204,7 @@ void AFastPacedFPSGameCharacter::Move(const FInputActionValue& Value)
 	FVector2D MovementVector = Value.Get<FVector2D>();
 
 
-	if (Controller != nullptr && !isWallRunning)
+	if (Controller != nullptr && MovementState != State::WallRunning)
 	{
 		// add movement 
 		AddMovementInput(GetActorForwardVector(), MovementVector.Y);
@@ -226,8 +229,7 @@ void AFastPacedFPSGameCharacter::Look(const FInputActionValue& Value)
 void AFastPacedFPSGameCharacter::Grapple()
 {
 
-	if (isGrappling == false) {
-		GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Red, TEXT("Grapple"));
+	if (MovementState != State::Grappling) {
 
 		FHitResult Hit;
 		FVector TraceStart = GetActorLocation();
@@ -238,6 +240,8 @@ void AFastPacedFPSGameCharacter::Grapple()
 
 		GetWorld()->LineTraceSingleByChannel(Hit, TraceStart, TraceEnd, ECC_Pawn, QueryParams);
 
+		GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Black, FString::Printf(TEXT("Bool: %s"), Hit.bBlockingHit ? TEXT("true") : TEXT("false")));
+
 		if (Hit.bBlockingHit && IsValid(Hit.GetActor()) && Hit.GetActor()->ActorHasTag("GrapplePoint"))
 		{
 
@@ -246,8 +250,10 @@ void AFastPacedFPSGameCharacter::Grapple()
 			grappleVelocity = GetFirstPersonCameraComponent()->GetForwardVector().GetSafeNormal();
 			GrappleActor = Hit.GetActor();
 
-			isGrappling = true;
+			MovementState = State::Grappling;
 			GetCharacterMovement()->GravityScale = 0;
+
+			GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Blue, TEXT("GRAPPLE"));
 
 			Super::LaunchCharacter(grappleVelocity, false, false);
 		}
@@ -259,7 +265,7 @@ void AFastPacedFPSGameCharacter::Grapple()
 
 void AFastPacedFPSGameCharacter::Attack()
 {
-	if (!isAttacking) {
+	if (MovementState != State::Attacking) {
 
 		FHitResult Hit;
 		FVector TraceStart = GetActorLocation();
@@ -279,7 +285,7 @@ void AFastPacedFPSGameCharacter::Attack()
 			Hit.GetActor()->TakeDamage(AttackDamage, FDamageEvent(DmgTypeClass), nullptr, this->GetOwner());
 		}
 
-		isAttacking = true;
+		MovementState = State::Attacking;
 
 		GetWorldTimerManager().SetTimer(CountdownTimerHandle, this, &AFastPacedFPSGameCharacter::MovementCoolDownManager, attackCooldownTime, false);
 	}
@@ -297,7 +303,7 @@ void AFastPacedFPSGameCharacter::Dash()
 
 		dashLocation = GetActorLocation();
 
-		isDashing = true;
+		MovementState = State::Dashing;
 		CanDash = false;
 	}
 
@@ -305,10 +311,10 @@ void AFastPacedFPSGameCharacter::Dash()
 
 void AFastPacedFPSGameCharacter::Block()
 {
-	if (CanBlock && !isDashing && !isGrappling)
+	if (CanBlock && MovementState != State::Dashing && MovementState != State::Grappling)
 	{
 		CanBlock = false;
-		isBlocking = true;
+		MovementState = State::Blocking;
 
 		GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Blue, TEXT("YES"));
 
@@ -318,7 +324,7 @@ void AFastPacedFPSGameCharacter::Block()
 
 void AFastPacedFPSGameCharacter::ResetBlocking()
 {
-	isBlocking = false;
+	MovementState = State::None;
 	CanDash = true;
 
 	GetWorldTimerManager().SetTimer(CountdownTimerHandle, this, &AFastPacedFPSGameCharacter::MovementCoolDownManager, BlockCooldownTime, false);
@@ -328,8 +334,8 @@ void AFastPacedFPSGameCharacter::MovementCoolDownManager()
 {
 	GetWorldTimerManager().ClearTimer(CountdownTimerHandle);
 
-	if (isAttacking) {
-		isAttacking = false;
+	if (MovementState == State::Attacking) {
+		MovementState = State::None;
 	}else if (!CanDash) {
 		CanDash =true;
 	}else if (!CanBlock) {
@@ -340,16 +346,14 @@ void AFastPacedFPSGameCharacter::MovementCoolDownManager()
 void AFastPacedFPSGameCharacter::LaunchPlayer(float Amount, FVector Direction)
 {
 	Super::LaunchCharacter(Direction * Amount, true, true);
-	isGrappling = false;
-	isDashing = false;
-	isWallRunning = false;
+	MovementState = State::None;
 }
 
 void AFastPacedFPSGameCharacter::Jump()
 {
 	Super::Jump();
 
-	if (isWallRunning) {
+	if (MovementState == State::WallRunning) {
 		GetCharacterMovement()->Velocity = (GetCharacterMovement()->Velocity.GetSafeNormal(0.0f) + wallJumpOffDir) * wallJumpOffVelocity;
 		GetCharacterMovement()->Velocity += FVector(0,0,1) * wallJumpOffVelocity / 2.5f;
 	}

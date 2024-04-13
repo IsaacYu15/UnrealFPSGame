@@ -19,10 +19,12 @@ DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
 
 UENUM(BlueprintType)
 enum class State : uint8 {
-	Dashing = 0,
-	Attacking = 1,
-	Grappling = 2,
-	WallRunning = 3,
+	None = 0,
+	Dashing = 1,
+	Attacking = 2,
+	Grappling = 3,
+	WallRunning = 4,
+	Blocking = 5,
 };
 
 UCLASS(config = Game)
@@ -85,15 +87,15 @@ public:
 
 	void Jump() override;
 
+	UPROPERTY(BlueprintReadWrite, Category = "State")
+	State MovementState;
+
 	/*WALL RUNNING */
 	UPROPERTY(EditAnywhere)
 	float wallRunSpeed;
 
 	UPROPERTY(BlueprintReadOnly, Category = "WallRunning")
 	int leanDirection = 1;
-
-	UPROPERTY(BlueprintReadOnly, Category = "WallRunning")
-	bool isWallRunning;
 
 	UPROPERTY()
 	FVector wallJumpOffDir;
@@ -114,15 +116,9 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Grappling")
 	float grappleSpeed;
 
-	UPROPERTY(BlueprintReadWrite, Category = "Grappling")
-	bool isGrappling;
-
 	/*ATTACKING*/
 	UPROPERTY(EditAnywhere, Category = "Attacking")
 	float AttackDamage = 50;
-
-	UPROPERTY(BlueprintReadOnly, Category = "Attacking")
-	bool isAttacking;
 
 	/*TIMING*/
 
@@ -156,14 +152,8 @@ public:
 	UPROPERTY()
 	bool CanDash = true;
 
-	UPROPERTY(BlueprintReadWrite, Category = "Dashing")
-	bool isDashing;
-
 	UPROPERTY(BlueprintReadOnly, Category = "Blocking")
 	bool CanBlock = true;
-
-	UPROPERTY(BlueprintReadOnly, Category = "Blocking")
-	bool isBlocking = false;
 
 	UPROPERTY(EditAnywhere, Category = "Blocking")
 	float BlockingTime = 0.5;
