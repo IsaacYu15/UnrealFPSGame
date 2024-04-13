@@ -232,21 +232,16 @@ void AFastPacedFPSGameCharacter::Grapple()
 	if (MovementState != State::Grappling) {
 
 		FHitResult Hit;
-		FVector TraceStart = GetActorLocation();
+		FVector TraceStart = FirstPersonCameraComponent->GetComponentLocation();
 		FVector TraceEnd = GetActorLocation() + GetFirstPersonCameraComponent()->GetForwardVector() * 90000;
 
 		FCollisionQueryParams QueryParams;
 		QueryParams.AddIgnoredActor(this);
 
-		GetWorld()->LineTraceSingleByChannel(Hit, TraceStart, TraceEnd, ECC_Pawn, QueryParams);
-
-		GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Black, FString::Printf(TEXT("Bool: %s"), Hit.bBlockingHit ? TEXT("true") : TEXT("false")));
+		GetWorld()->LineTraceSingleByChannel(Hit, TraceStart, TraceEnd, ECC_Camera, QueryParams);
 
 		if (Hit.bBlockingHit && IsValid(Hit.GetActor()) && Hit.GetActor()->ActorHasTag("GrapplePoint"))
 		{
-
-			DrawDebugLine(GetWorld(), TraceStart, Hit.ImpactPoint, FColor::Red, false, 1.0f, 0, 10.0f);
-
 			grappleVelocity = GetFirstPersonCameraComponent()->GetForwardVector().GetSafeNormal();
 			GrappleActor = Hit.GetActor();
 
@@ -268,7 +263,7 @@ void AFastPacedFPSGameCharacter::Attack()
 	if (MovementState != State::Attacking) {
 
 		FHitResult Hit;
-		FVector TraceStart = GetActorLocation();
+		FVector TraceStart = FirstPersonCameraComponent->GetComponentLocation();
 		FVector TraceEnd = GetActorLocation() + GetFirstPersonCameraComponent()->GetForwardVector() * 350;
 
 		FCollisionQueryParams QueryParams;
