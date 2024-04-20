@@ -5,7 +5,7 @@
 ===========================================================================*/
 
 #include "UObject/GeneratedCppIncludes.h"
-#include "FastPacedFPSGame/FastPacedFPSGameProjectile.h"
+#include "FastPacedFPSGame/Public/FastPacedFPSGameProjectile.h"
 #include "../../Source/Runtime/Engine/Classes/Engine/HitResult.h"
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodeFastPacedFPSGameProjectile() {}
@@ -103,7 +103,7 @@ void EmptyLinkFunctionForGeneratedCodeFastPacedFPSGameProjectile() {}
 #if !UE_BUILD_SHIPPING
 		{ "Comment", "/** called when projectile hits something */" },
 #endif
-		{ "ModuleRelativePath", "FastPacedFPSGameProjectile.h" },
+		{ "ModuleRelativePath", "Public/FastPacedFPSGameProjectile.h" },
 #if !UE_BUILD_SHIPPING
 		{ "ToolTip", "called when projectile hits something" },
 #endif
@@ -151,13 +151,13 @@ void EmptyLinkFunctionForGeneratedCodeFastPacedFPSGameProjectile() {}
 	};
 	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_AFastPacedFPSGameProjectile_Statics::DependentSingletons) < 16);
 	const FClassFunctionLinkInfo Z_Construct_UClass_AFastPacedFPSGameProjectile_Statics::FuncInfo[] = {
-		{ &Z_Construct_UFunction_AFastPacedFPSGameProjectile_OnHit, "OnHit" }, // 73527604
+		{ &Z_Construct_UFunction_AFastPacedFPSGameProjectile_OnHit, "OnHit" }, // 3551233834
 	};
 	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_AFastPacedFPSGameProjectile_Statics::FuncInfo) < 2048);
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AFastPacedFPSGameProjectile_Statics::Class_MetaDataParams[] = {
 		{ "IncludePath", "FastPacedFPSGameProjectile.h" },
-		{ "ModuleRelativePath", "FastPacedFPSGameProjectile.h" },
+		{ "ModuleRelativePath", "Public/FastPacedFPSGameProjectile.h" },
 	};
 #endif
 #if WITH_METADATA
@@ -167,7 +167,7 @@ void EmptyLinkFunctionForGeneratedCodeFastPacedFPSGameProjectile() {}
 		{ "Comment", "/** Sphere collision component */" },
 #endif
 		{ "EditInline", "true" },
-		{ "ModuleRelativePath", "FastPacedFPSGameProjectile.h" },
+		{ "ModuleRelativePath", "Public/FastPacedFPSGameProjectile.h" },
 #if !UE_BUILD_SHIPPING
 		{ "ToolTip", "Sphere collision component" },
 #endif
@@ -182,7 +182,7 @@ void EmptyLinkFunctionForGeneratedCodeFastPacedFPSGameProjectile() {}
 		{ "Comment", "/** Projectile movement component */" },
 #endif
 		{ "EditInline", "true" },
-		{ "ModuleRelativePath", "FastPacedFPSGameProjectile.h" },
+		{ "ModuleRelativePath", "Public/FastPacedFPSGameProjectile.h" },
 #if !UE_BUILD_SHIPPING
 		{ "ToolTip", "Projectile movement component" },
 #endif
@@ -226,15 +226,15 @@ void EmptyLinkFunctionForGeneratedCodeFastPacedFPSGameProjectile() {}
 	}
 	DEFINE_VTABLE_PTR_HELPER_CTOR(AFastPacedFPSGameProjectile);
 	AFastPacedFPSGameProjectile::~AFastPacedFPSGameProjectile() {}
-	struct Z_CompiledInDeferFile_FID_Users_yuisa_OneDrive_Documents_Unreal_Projects_FastPacedFPSGame_Source_FastPacedFPSGame_FastPacedFPSGameProjectile_h_Statics
+	struct Z_CompiledInDeferFile_FID_Users_yuisa_OneDrive_Documents_Unreal_Projects_FastPacedFPSGame_Source_FastPacedFPSGame_Public_FastPacedFPSGameProjectile_h_Statics
 	{
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
-	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_yuisa_OneDrive_Documents_Unreal_Projects_FastPacedFPSGame_Source_FastPacedFPSGame_FastPacedFPSGameProjectile_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AFastPacedFPSGameProjectile, AFastPacedFPSGameProjectile::StaticClass, TEXT("AFastPacedFPSGameProjectile"), &Z_Registration_Info_UClass_AFastPacedFPSGameProjectile, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AFastPacedFPSGameProjectile), 3852422762U) },
+	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_yuisa_OneDrive_Documents_Unreal_Projects_FastPacedFPSGame_Source_FastPacedFPSGame_Public_FastPacedFPSGameProjectile_h_Statics::ClassInfo[] = {
+		{ Z_Construct_UClass_AFastPacedFPSGameProjectile, AFastPacedFPSGameProjectile::StaticClass, TEXT("AFastPacedFPSGameProjectile"), &Z_Registration_Info_UClass_AFastPacedFPSGameProjectile, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AFastPacedFPSGameProjectile), 942504426U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_yuisa_OneDrive_Documents_Unreal_Projects_FastPacedFPSGame_Source_FastPacedFPSGame_FastPacedFPSGameProjectile_h_1308657544(TEXT("/Script/FastPacedFPSGame"),
-		Z_CompiledInDeferFile_FID_Users_yuisa_OneDrive_Documents_Unreal_Projects_FastPacedFPSGame_Source_FastPacedFPSGame_FastPacedFPSGameProjectile_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_yuisa_OneDrive_Documents_Unreal_Projects_FastPacedFPSGame_Source_FastPacedFPSGame_FastPacedFPSGameProjectile_h_Statics::ClassInfo),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_yuisa_OneDrive_Documents_Unreal_Projects_FastPacedFPSGame_Source_FastPacedFPSGame_Public_FastPacedFPSGameProjectile_h_1206580186(TEXT("/Script/FastPacedFPSGame"),
+		Z_CompiledInDeferFile_FID_Users_yuisa_OneDrive_Documents_Unreal_Projects_FastPacedFPSGame_Source_FastPacedFPSGame_Public_FastPacedFPSGameProjectile_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_yuisa_OneDrive_Documents_Unreal_Projects_FastPacedFPSGame_Source_FastPacedFPSGame_Public_FastPacedFPSGameProjectile_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

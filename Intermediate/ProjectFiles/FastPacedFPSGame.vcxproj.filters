@@ -41,93 +41,108 @@
     <Filter Include="Source\FastPacedFPSGame">
       <UniqueIdentifier>{1EB7A507-8C7C-30FD-A406-CB41FB21148F}</UniqueIdentifier>
     </Filter>
-    <ClCompile Include="..\..\Source\FastPacedFPSGame\ActorHealthComponent.cpp">
-      <Filter>Source\FastPacedFPSGame</Filter>
-    </ClCompile>
-    <ClInclude Include="..\..\Source\FastPacedFPSGame\ActorHealthComponent.h">
-      <Filter>Source\FastPacedFPSGame</Filter>
-    </ClInclude>
-    <ClCompile Include="..\..\Source\FastPacedFPSGame\BaseTurret.cpp">
-      <Filter>Source\FastPacedFPSGame</Filter>
-    </ClCompile>
-    <ClInclude Include="..\..\Source\FastPacedFPSGame\BaseTurret.h">
-      <Filter>Source\FastPacedFPSGame</Filter>
-    </ClInclude>
-    <ClCompile Include="..\..\Source\FastPacedFPSGame\DamagePlayerOnContact.cpp">
-      <Filter>Source\FastPacedFPSGame</Filter>
-    </ClCompile>
-    <ClInclude Include="..\..\Source\FastPacedFPSGame\DamagePlayerOnContact.h">
-      <Filter>Source\FastPacedFPSGame</Filter>
-    </ClInclude>
     <None Include="..\..\Source\FastPacedFPSGame\FastPacedFPSGame.Build.cs">
       <Filter>Source\FastPacedFPSGame</Filter>
     </None>
+    <Filter Include="Source\FastPacedFPSGame\Private">
+      <UniqueIdentifier>{50618AF9-2C9F-3A61-AC24-AD893017A869}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\FastPacedFPSGame\Private\TestActor.cpp">
+      <Filter>Source\FastPacedFPSGame\Private</Filter>
+    </ClCompile>
+    <Filter Include="Source\FastPacedFPSGame\Public">
+      <UniqueIdentifier>{DDD3CEBF-A335-363A-8337-4A5AF6465FF6}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Source\FastPacedFPSGame\Public\TestActor.h">
+      <Filter>Source\FastPacedFPSGame\Public</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Source\FastPacedFPSGame\ActorHealthComponent.cpp">
+      <Filter>Source\FastPacedFPSGame\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\FastPacedFPSGame\BaseTurret.cpp">
+      <Filter>Source\FastPacedFPSGame\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\FastPacedFPSGame\DamagePlayerOnContact.cpp">
+      <Filter>Source\FastPacedFPSGame\Private</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\FastPacedFPSGame\FastPacedFPSGame.cpp">
-      <Filter>Source\FastPacedFPSGame</Filter>
+      <Filter>Source\FastPacedFPSGame\Private</Filter>
     </ClCompile>
-    <ClInclude Include="..\..\Source\FastPacedFPSGame\FastPacedFPSGame.h">
-      <Filter>Source\FastPacedFPSGame</Filter>
-    </ClInclude>
     <ClCompile Include="..\..\Source\FastPacedFPSGame\FastPacedFPSGameCharacter.cpp">
-      <Filter>Source\FastPacedFPSGame</Filter>
+      <Filter>Source\FastPacedFPSGame\Private</Filter>
     </ClCompile>
-    <ClInclude Include="..\..\Source\FastPacedFPSGame\FastPacedFPSGameCharacter.h">
-      <Filter>Source\FastPacedFPSGame</Filter>
-    </ClInclude>
     <ClCompile Include="..\..\Source\FastPacedFPSGame\FastPacedFPSGameGameMode.cpp">
-      <Filter>Source\FastPacedFPSGame</Filter>
+      <Filter>Source\FastPacedFPSGame\Private</Filter>
     </ClCompile>
-    <ClInclude Include="..\..\Source\FastPacedFPSGame\FastPacedFPSGameGameMode.h">
-      <Filter>Source\FastPacedFPSGame</Filter>
-    </ClInclude>
     <ClCompile Include="..\..\Source\FastPacedFPSGame\FastPacedFPSGamePlayerController.cpp">
-      <Filter>Source\FastPacedFPSGame</Filter>
+      <Filter>Source\FastPacedFPSGame\Private</Filter>
     </ClCompile>
-    <ClInclude Include="..\..\Source\FastPacedFPSGame\FastPacedFPSGamePlayerController.h">
-      <Filter>Source\FastPacedFPSGame</Filter>
-    </ClInclude>
     <ClCompile Include="..\..\Source\FastPacedFPSGame\FastPacedFPSGameProjectile.cpp">
-      <Filter>Source\FastPacedFPSGame</Filter>
+      <Filter>Source\FastPacedFPSGame\Private</Filter>
     </ClCompile>
-    <ClInclude Include="..\..\Source\FastPacedFPSGame\FastPacedFPSGameProjectile.h">
-      <Filter>Source\FastPacedFPSGame</Filter>
-    </ClInclude>
     <ClCompile Include="..\..\Source\FastPacedFPSGame\LaserTurret.cpp">
-      <Filter>Source\FastPacedFPSGame</Filter>
+      <Filter>Source\FastPacedFPSGame\Private</Filter>
     </ClCompile>
-    <ClInclude Include="..\..\Source\FastPacedFPSGame\LaserTurret.h">
-      <Filter>Source\FastPacedFPSGame</Filter>
-    </ClInclude>
     <ClCompile Include="..\..\Source\FastPacedFPSGame\LVL_INGR_LerpBetweenPoints.cpp">
-      <Filter>Source\FastPacedFPSGame</Filter>
+      <Filter>Source\FastPacedFPSGame\Private</Filter>
     </ClCompile>
-    <ClInclude Include="..\..\Source\FastPacedFPSGame\LVL_INGR_LerpBetweenPoints.h">
-      <Filter>Source\FastPacedFPSGame</Filter>
-    </ClInclude>
     <ClCompile Include="..\..\Source\FastPacedFPSGame\ProjectileTurret.cpp">
-      <Filter>Source\FastPacedFPSGame</Filter>
+      <Filter>Source\FastPacedFPSGame\Private</Filter>
     </ClCompile>
-    <ClInclude Include="..\..\Source\FastPacedFPSGame\ProjectileTurret.h">
-      <Filter>Source\FastPacedFPSGame</Filter>
-    </ClInclude>
     <ClCompile Include="..\..\Source\FastPacedFPSGame\TestClass.cpp">
-      <Filter>Source\FastPacedFPSGame</Filter>
+      <Filter>Source\FastPacedFPSGame\Private</Filter>
     </ClCompile>
-    <ClInclude Include="..\..\Source\FastPacedFPSGame\TestClass.h">
-      <Filter>Source\FastPacedFPSGame</Filter>
-    </ClInclude>
     <ClCompile Include="..\..\Source\FastPacedFPSGame\TP_PickUpComponent.cpp">
-      <Filter>Source\FastPacedFPSGame</Filter>
+      <Filter>Source\FastPacedFPSGame\Private</Filter>
     </ClCompile>
-    <ClInclude Include="..\..\Source\FastPacedFPSGame\TP_PickUpComponent.h">
-      <Filter>Source\FastPacedFPSGame</Filter>
-    </ClInclude>
     <ClCompile Include="..\..\Source\FastPacedFPSGame\TP_WeaponComponent.cpp">
-      <Filter>Source\FastPacedFPSGame</Filter>
+      <Filter>Source\FastPacedFPSGame\Private</Filter>
     </ClCompile>
-    <ClInclude Include="..\..\Source\FastPacedFPSGame\TP_WeaponComponent.h">
-      <Filter>Source\FastPacedFPSGame</Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Source\FastPacedFPSGame\ActorHealthComponent.h">
+      <Filter>Source\FastPacedFPSGame\Public</Filter>
     </ClInclude>
-    <None Include="cpp.hint" />
+    <ClInclude Include="..\..\Source\FastPacedFPSGame\BaseTurret.h">
+      <Filter>Source\FastPacedFPSGame\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\FastPacedFPSGame\DamagePlayerOnContact.h">
+      <Filter>Source\FastPacedFPSGame\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\FastPacedFPSGame\FastPacedFPSGame.h">
+      <Filter>Source\FastPacedFPSGame\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\FastPacedFPSGame\FastPacedFPSGameCharacter.h">
+      <Filter>Source\FastPacedFPSGame\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\FastPacedFPSGame\FastPacedFPSGameGameMode.h">
+      <Filter>Source\FastPacedFPSGame\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\FastPacedFPSGame\FastPacedFPSGamePlayerController.h">
+      <Filter>Source\FastPacedFPSGame\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\FastPacedFPSGame\FastPacedFPSGameProjectile.h">
+      <Filter>Source\FastPacedFPSGame\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\FastPacedFPSGame\LaserTurret.h">
+      <Filter>Source\FastPacedFPSGame\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\FastPacedFPSGame\LVL_INGR_LerpBetweenPoints.h">
+      <Filter>Source\FastPacedFPSGame\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\FastPacedFPSGame\ProjectileTurret.h">
+      <Filter>Source\FastPacedFPSGame\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\FastPacedFPSGame\TestClass.h">
+      <Filter>Source\FastPacedFPSGame\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\FastPacedFPSGame\TP_PickUpComponent.h">
+      <Filter>Source\FastPacedFPSGame\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\FastPacedFPSGame\TP_WeaponComponent.h">
+      <Filter>Source\FastPacedFPSGame\Public</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

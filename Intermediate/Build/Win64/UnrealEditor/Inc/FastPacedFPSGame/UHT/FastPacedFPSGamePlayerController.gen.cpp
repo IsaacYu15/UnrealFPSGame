@@ -5,7 +5,7 @@
 ===========================================================================*/
 
 #include "UObject/GeneratedCppIncludes.h"
-#include "FastPacedFPSGame/FastPacedFPSGamePlayerController.h"
+#include "FastPacedFPSGame/Public/FastPacedFPSGamePlayerController.h"
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodeFastPacedFPSGamePlayerController() {}
 // Cross Module References
@@ -49,7 +49,7 @@ void EmptyLinkFunctionForGeneratedCodeFastPacedFPSGamePlayerController() {}
 #endif
 		{ "HideCategories", "Collision Rendering Transformation" },
 		{ "IncludePath", "FastPacedFPSGamePlayerController.h" },
-		{ "ModuleRelativePath", "FastPacedFPSGamePlayerController.h" },
+		{ "ModuleRelativePath", "Public/FastPacedFPSGamePlayerController.h" },
 	};
 #endif
 #if WITH_METADATA
@@ -58,7 +58,7 @@ void EmptyLinkFunctionForGeneratedCodeFastPacedFPSGamePlayerController() {}
 #if !UE_BUILD_SHIPPING
 		{ "Comment", "/** Input Mapping Context to be used for player input */" },
 #endif
-		{ "ModuleRelativePath", "FastPacedFPSGamePlayerController.h" },
+		{ "ModuleRelativePath", "Public/FastPacedFPSGamePlayerController.h" },
 #if !UE_BUILD_SHIPPING
 		{ "ToolTip", "Input Mapping Context to be used for player input" },
 #endif
@@ -102,15 +102,15 @@ void EmptyLinkFunctionForGeneratedCodeFastPacedFPSGamePlayerController() {}
 	AFastPacedFPSGamePlayerController::AFastPacedFPSGamePlayerController(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {}
 	DEFINE_VTABLE_PTR_HELPER_CTOR(AFastPacedFPSGamePlayerController);
 	AFastPacedFPSGamePlayerController::~AFastPacedFPSGamePlayerController() {}
-	struct Z_CompiledInDeferFile_FID_Users_yuisa_OneDrive_Documents_Unreal_Projects_FastPacedFPSGame_Source_FastPacedFPSGame_FastPacedFPSGamePlayerController_h_Statics
+	struct Z_CompiledInDeferFile_FID_Users_yuisa_OneDrive_Documents_Unreal_Projects_FastPacedFPSGame_Source_FastPacedFPSGame_Public_FastPacedFPSGamePlayerController_h_Statics
 	{
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
-	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_yuisa_OneDrive_Documents_Unreal_Projects_FastPacedFPSGame_Source_FastPacedFPSGame_FastPacedFPSGamePlayerController_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AFastPacedFPSGamePlayerController, AFastPacedFPSGamePlayerController::StaticClass, TEXT("AFastPacedFPSGamePlayerController"), &Z_Registration_Info_UClass_AFastPacedFPSGamePlayerController, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AFastPacedFPSGamePlayerController), 2375652910U) },
+	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_yuisa_OneDrive_Documents_Unreal_Projects_FastPacedFPSGame_Source_FastPacedFPSGame_Public_FastPacedFPSGamePlayerController_h_Statics::ClassInfo[] = {
+		{ Z_Construct_UClass_AFastPacedFPSGamePlayerController, AFastPacedFPSGamePlayerController::StaticClass, TEXT("AFastPacedFPSGamePlayerController"), &Z_Registration_Info_UClass_AFastPacedFPSGamePlayerController, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AFastPacedFPSGamePlayerController), 4154280338U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_yuisa_OneDrive_Documents_Unreal_Projects_FastPacedFPSGame_Source_FastPacedFPSGame_FastPacedFPSGamePlayerController_h_2092924412(TEXT("/Script/FastPacedFPSGame"),
-		Z_CompiledInDeferFile_FID_Users_yuisa_OneDrive_Documents_Unreal_Projects_FastPacedFPSGame_Source_FastPacedFPSGame_FastPacedFPSGamePlayerController_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_yuisa_OneDrive_Documents_Unreal_Projects_FastPacedFPSGame_Source_FastPacedFPSGame_FastPacedFPSGamePlayerController_h_Statics::ClassInfo),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_yuisa_OneDrive_Documents_Unreal_Projects_FastPacedFPSGame_Source_FastPacedFPSGame_Public_FastPacedFPSGamePlayerController_h_2200129118(TEXT("/Script/FastPacedFPSGame"),
+		Z_CompiledInDeferFile_FID_Users_yuisa_OneDrive_Documents_Unreal_Projects_FastPacedFPSGame_Source_FastPacedFPSGame_Public_FastPacedFPSGamePlayerController_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_yuisa_OneDrive_Documents_Unreal_Projects_FastPacedFPSGame_Source_FastPacedFPSGame_Public_FastPacedFPSGamePlayerController_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
