@@ -1,45 +1,29 @@
-import magic
-import os
+import unreal
 
-targetFolders = [
-    "Content",
-    "Source"
-]
+def rename_assets(search_pattern, replace_pattern, use_case):
+    system_lib = unreal.SystemLibrary()
+    editor_util = unreal.EditorUtilityLibrary()
+    string_lib = unreal.StringLibrary()
 
-validTags = {
-    "material" : "M",
-    "particle" : "P",
-    "mesh"     : "SM",
-    "blueprint": "BP",
-    
-}
+    #selected assets
+    selected_assets = editor_util.get_selected_assets()
+    num_assets = len(selected_assets)
+    replaced = 0
+    unreal.log("Selected {} assets".format(num_assets))
 
-rootdir = 'C:/Users/yuisa/OneDrive/Documents/Unreal Projects/FastPacedFPSGame'
+    for asset in selected_assets:
+        asset_name = system_lib.get_object_name(asset)
+        
+        if string_lib.contains(asset_name, search_pattern, use_case):
+            search_case = unreal.SearchCase.CASE_SENSITIVE if use_case else unreal.SearchCase.IGNORE_CASE
+            replaced_name = string_lib.replace(asset_name, search_pattern, replace_pattern, search_case=search_case)
+            editor_util.rename_asset(asset, replaced_name)
 
-def get_file_type(file_path):
-    try:
-        mime = magic.Magic(mime=True)
-        file_type = mime.from_file(file_path)
-        return file_type
-    except Exception as e:
-        print("Error:", e)
-        return None
-    
-for subdir, dirs, files in os.walk(rootdir):
+            replaced += 1
+            unreal.log("Replaced {} with {}".format(asset_name, replaced_name))
+        else:
+            unreal.log("{} asset is named properly".format(asset_name))
 
-    #filter out folders we want
-    for target in targetFolders:
-        if subdir.__contains__(target):
-            for file in files:
+    unreal.log("Replaced {} assets".format(replaced))
 
-                if file.__contains__('.uasset'):
-
-                    idx = file.find('_')
-
-                    if idx == -1:
-                        print("NO_TAG: " + file)
-                    else:
-                        substr = file[0:idx:1]
-                        if substr not in validTags.values():
-                            print ("INVALID TAG: ")
-                            print (substr + " " + file)
+rename_assets("test", "Old", False)
