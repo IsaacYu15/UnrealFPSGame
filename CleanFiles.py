@@ -5,7 +5,6 @@ def rename_assets(search_pattern, replace_pattern, use_case):
     editor_util = unreal.EditorUtilityLibrary()
     string_lib = unreal.StringLibrary()
 
-    #selected assets
     selected_assets = editor_util.get_selected_assets()
     num_assets = len(selected_assets)
     replaced = 0
@@ -25,5 +24,6 @@ def rename_assets(search_pattern, replace_pattern, use_case):
             unreal.log("{} asset is named properly".format(asset_name))
 
     unreal.log("Replaced {} assets".format(replaced))
+
 
 rename_assets("test", "Old", False)
