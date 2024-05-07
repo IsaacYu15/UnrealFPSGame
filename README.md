@@ -1,9 +1,10 @@
-# UNREAL FPS GAME
-Unreal FPS Game is an untitled project where I'm attempting to create my dream game, a first-person perspective hack and slash styled game.
-Here is a breakdown of the current features included:
-- Wall Running and Grappling
-- Turrets with various using inheritence
-- Basic AI behaviours using behaviour trees
+# FIRST PERSON LOCOMOTION SYSTEM
+A character controller system for first-person perspective hack-and-slash-styled games including:
+- Wall Running
+- Grappling
+- Handling health and giving damage
+- Dashing
+- Animations that adapt to the current state of the player
 
 For video updates of the entire process see my [playlist!](https://www.youtube.com/playlist?list=PLNU3z4IRiDwPnbklO3j4yoONePV993GTu)
  
