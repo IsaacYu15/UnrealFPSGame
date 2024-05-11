@@ -25,5 +25,3 @@ def rename_assets(search_pattern, replace_pattern, use_case):
 
     unreal.log("Replaced {} assets".format(replaced))
 
-
-rename_assets("test", "Old", False)
