@@ -2,7 +2,7 @@
 This project aims to create a simple movement system for a first-person perspective, parkour-styled game. 
 The movement system is designed to handle various actions such as wall running, grappling, dashing and blending using animations. 
 
-[Demo](https://www.youtube.com/watch?v=4oiklUJDf0w)
+Here is a [demo](https://www.youtube.com/watch?v=4oiklUJDf0w) of all the components in action
 
 I am currently working on extending it to a full game! 
 Devlogs in my [playlist!](https://www.youtube.com/playlist?list=PLNU3z4IRiDwPnbklO3j4yoONePV993GTu)
